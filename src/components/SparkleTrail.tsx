@@ -21,9 +21,9 @@ export function SparkleTrail() {
     if (!canvasRef.current) return;
 
     const canvas: HTMLCanvasElement = canvasRef.current;
-  const ctx = canvas.getContext('2d');
+ const ctx = canvas.getContext('2d')!;
 
-    if (!ctx) return;
+  
 
     const sparkles: Sparkle[] = [];
 

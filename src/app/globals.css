@@ -231,7 +231,7 @@ border:1px solid #7985AF;
 .bgm-list .it small{font-size:calc(9.5px*var(--fs,1));color:var(--bgm-ic)}
 .bgm-list .it:hover{background:rgba(255,255,255,.08)}
 .bgm-list .it.on{background:rgba(255,255,255,.06)}
-.bgm-list .it.on b{color:var(--accent-soft,var(--accent))}
+.bgm-list .it.on b{color:#7985af}
 .vol{width:64px;height:3px;border-radius:3px;background:#454b55;position:relative;cursor:var(--cur-pointer,pointer)}
 .vol i{position:absolute;left:0;top:0;height:100%;width:62%;background:var(--bgm-vol);border-radius:3px}
 .vol i::after{content:"";position:absolute;right:-4px;top:-3.5px;width:10px;height:10px;border-radius:50%;background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.5)}

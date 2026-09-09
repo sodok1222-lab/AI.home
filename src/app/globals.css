@@ -192,10 +192,10 @@ border:1px solid #7985AF;
     border-radius:50%;
 
     /* ⭐ 안쪽 원 */
-    background:#7985AF;
+    background:#4c5986;
 
     /* ⭐ 안쪽 얇은 보라색 선 */
-    border:2px solid #4c5986;
+    border:2px solid #7985AF;
 }
 
 /* ⭐ 회전 애니메이션 */

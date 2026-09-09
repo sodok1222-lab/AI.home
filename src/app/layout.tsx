@@ -3,6 +3,7 @@ import './globals.css';
 import { ThemeProvider } from '@/lib/ThemeProvider';
 import { AuthProvider } from '@/lib/auth';
 import { MainStoreProvider } from '@/lib/mainStore';
+import { SparkleTrail } from '@/components/SparkleTrail';
 import { BgmStoreProvider } from '@/lib/bgmStore';
 import { FontProvider } from '@/lib/fontStore';
 import { ToastProvider } from '@/components/ui/Toast';
@@ -64,6 +65,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
+        <SparkleTrail />
+        
         {/* 서버 연결 확정 후에 앱을 그림 — 설정(ohome.config.json/로컬/env)을 한 번 읽는다 (v2.0) */}
         <ServerBoot>
         <ThemeProvider>

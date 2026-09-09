@@ -11,6 +11,7 @@ import { TopBar } from '@/components/shell/TopBar';
 import { BgmPlayer } from '@/components/shell/BgmPlayer';
 import { TipLayer } from '@/components/ui/TipLayer';
 import { CursorLayer } from '@/components/shell/CursorLayer';
+import { ClickSound } from '@/components/shell/ClickSound';
 import { ImgProtect } from '@/components/shell/ImgProtect';
 import { SetupGate } from '@/components/shell/SetupGate';
 import { DocTitle } from '@/components/shell/DocTitle';
@@ -85,6 +86,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   {/* BGM 미니 플레이어 — 전역 상주, 페이지 이동에도 유지 (4.1) */}
                   <BgmPlayer />
                   {/* 전역 커스텀 툴팁 — data-tip 요소 공통 (7장) */}
+                  <ClickSound />
                   <TipLayer />
                   {/* 커스텀 마우스 커서 (5.1) */}
                   <CursorLayer />

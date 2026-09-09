@@ -202,7 +202,7 @@ export async function createSupabaseBackend(
       return n;
     },
 
-  subscribeTable(coll, onChange) {
+  subscribe(coll, onChange) {
   const ch = sb.channel(`ohome:${coll}:${crypto.randomUUID()}`)
     .on(
       'postgres_changes',

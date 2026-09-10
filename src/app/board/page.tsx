@@ -72,8 +72,7 @@ function BoardInner() {
   const canRead = (p: Post) =>
   p.visibility === 'public' ||
   (p.visibility === 'member' && !!user) ||
-  (p.visibility === 'private' && !!p.authorId && p.authorId === user?.id) ||
-  (!p.visibility && !!user);
+  (p.visibility === 'private' && !!p.authorId && p.authorId === user?.id);
 
   if (!boardsLoaded) return <section className="page" />;
 

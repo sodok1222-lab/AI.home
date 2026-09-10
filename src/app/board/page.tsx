@@ -73,6 +73,7 @@ function BoardInner() {
   p.visibility === 'public' ||
   (p.visibility === 'member' && !!user) ||
   (p.visibility === 'private' && !!p.authorId && p.authorId === user?.id);
+  (!p.visibility && p.secret && (!!user || !!isAdmin))
 
   if (!boardsLoaded) return <section className="page" />;
 

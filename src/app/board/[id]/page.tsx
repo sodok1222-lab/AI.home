@@ -63,7 +63,7 @@ const canRead =
   post.visibility === 'public' ||
   (post.visibility === 'member' && !!user) ||
   (post.visibility === 'private' && isAuthor) ||
-  (!post.visibility && post.secret && (isAdmin || isAuthor));
+  (!post.visibility && post.secret && !!user);
 
 if (!canRead) {
   return (

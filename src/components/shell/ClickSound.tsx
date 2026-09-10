@@ -12,7 +12,7 @@ export function ClickSound() {
     audio.preload = 'auto';
 
     // 소리 크기
-    audio.volume = 0.95;
+    audio.volume = 0.80;
 
     audioRef.current = audio;
 

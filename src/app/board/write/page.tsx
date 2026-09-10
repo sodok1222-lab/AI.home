@@ -8,7 +8,7 @@ import { useLocalList, BOARD_SEED, Post, newId, FoldType } from '@/lib/postStore
 import type { Visibility } from '@/lib/charStore';
 import { useBoards, boardHref, MAIN_BOARD_ID } from '@/lib/boardStore';
 import { renderBody } from '@/lib/sanitize';
-import { KInput, KTextarea, KSelect, KCheck } from '@/components/ui/Kit';
+import { KInput, KTextarea, KSelect, KCheck, KLabel } from '@/components/ui/Kit';
 import { CropEditor, CropImg, CropValue } from '@/components/ui/CropEditor';
 import { ConfirmModal } from '@/components/ui/Modal';
 import { RichEditor } from '@/components/ui/RichEditor';

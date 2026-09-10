@@ -4,7 +4,8 @@
 import React, { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/lib/auth';
-import { useLocalList, BOARD_SEED, Post, newId, FoldType, Visibility } from '@/lib/postStore';
+import { useLocalList, BOARD_SEED, Post, newId, FoldType } from '@/lib/postStore';
+import type { Visibility } from '@/lib/charStore';
 import { useBoards, boardHref, MAIN_BOARD_ID } from '@/lib/boardStore';
 import { renderBody } from '@/lib/sanitize';
 import { KInput, KTextarea, KSelect, KCheck } from '@/components/ui/Kit';

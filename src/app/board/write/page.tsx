@@ -223,9 +223,19 @@ function WriteInner() {
                 placeholder="쉼표로 구분" style={{ flex: 1 }} />
             </div>
             <div style={{ display: 'grid', gap: 9 }}>
-              <KCheck label="비밀글 (관리자와 나만 열람)" checked={secret} onChange={setSecret} />
-              {isAdmin && <KCheck label="공지로 고정" checked={notice} onChange={setNotice} />}
-            </div>
+  <KLabel>공개범위</KLabel>
+  <KSelect
+    minWidth={130}
+    value={visibility}
+    onChange={v => setVisibility(v as Visibility)}
+    options={[
+      { value: 'public', label: '전체공개' },
+      { value: 'member', label: '멤버공개' },
+      { value: 'private', label: '나만보기' },
+    ]}
+  />
+  {isAdmin && <KCheck label="공지로 고정" checked={notice} onChange={setNotice} />}
+</div>
           </div>
           <div className="panel widget" style={{ marginBottom: 14 }}>
             <h4>접기 (6.2)</h4>

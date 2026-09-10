@@ -77,7 +77,7 @@ function WriteInner() {
     // 에디터로 쓴 글을 수정하면 갑자기 태그가 보였다 (authored 없는 옛 글은 지금까지대로 HTML)
     setWriteMode(p.mode === 'md' ? 'md' : (p.authored === 'editor' ? 'editor' : 'html'));
     setCategory(p.category);
-    setSecret(p.secret); setNotice(p.notice);
+    setSecret(p.secret); setVisibility(p.visibility ?? (p.secret ? 'private' : 'public')); setNotice(p.notice);
     setFoldType(p.fold?.type ?? 'none'); setFoldLabel(p.fold?.label ?? '');
     setTagsText((p.tags ?? []).join(', '));
     setThumbSrc(p.thumbSrc); setThumbCrop(p.thumbCrop);
@@ -105,7 +105,7 @@ function WriteInner() {
         mode: writeMode === 'md' ? 'md' : 'html',
         authored: writeMode === 'editor' ? 'editor' : undefined,
         category,
-        secret, notice: isAdmin ? notice : p.notice,
+        secret, visibility, notice: isAdmin ? notice : p.notice,
         tags: parseTags(tagsText),
         fold: foldType === 'none' ? null : { type: foldType, label: foldType === 'custom' ? foldLabel : undefined },
         thumbSrc, thumbCrop,
@@ -118,7 +118,7 @@ function WriteInner() {
       id: newId(), title: title.trim(), body,
       mode: writeMode === 'md' ? 'md' : 'html', category,
       author: user.nickname, authorId: user.id, date: new Date().toISOString(),
-      secret, notice: isAdmin && notice,
+      secret, visibility, notice: isAdmin && notice,
       tags: parseTags(tagsText),
       fold: foldType === 'none' ? null : { type: foldType, label: foldType === 'custom' ? foldLabel : undefined },
       comments: [],

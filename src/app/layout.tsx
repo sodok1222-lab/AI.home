@@ -11,7 +11,7 @@ import { TopBar } from '@/components/shell/TopBar';
 import { BgmPlayer } from '@/components/shell/BgmPlayer';
 import { TipLayer } from '@/components/ui/TipLayer';
 import { CursorLayer } from '@/components/shell/CursorLayer';
-import ClickSound from '@/components/shell/ClickSound';
+import { ClickSound } from '@/components/shell/ClickSound';
 import { ImgProtect } from '@/components/shell/ImgProtect';
 import { SetupGate } from '@/components/shell/SetupGate';
 import { DocTitle } from '@/components/shell/DocTitle';

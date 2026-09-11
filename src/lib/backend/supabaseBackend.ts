@@ -126,14 +126,31 @@ export async function createSupabaseBackend(
     },
 
     async fetchList<T extends ListItem>(coll: string): Promise<T[]> {
-      const { data, error } = await sb.from(coll).select('id, data, sort').order('sort', { ascending: true });
-      if (error) throw error;
-      return (data ?? []).map(r => {
-        const row = r as { id: string; data: Record<string, unknown> };
-        return { ...(row.data ?? {}), id: row.id } as T;
-      });
-    },
+  const { data, error } = await sb
+    .from(coll)
+    .select('id, data, author_id, visibility, sort')
+    .order('sort', { ascending: true });
 
+  if (error) throw error;
+
+  return (data ?? []).map(r => {
+    const row = r as {
+      id: string;
+      data: Record<string, unknown>;
+      author_id?: string | null;
+      visibility?: string | null;
+    };
+
+    return {
+      ...(row.data ?? {}),
+      id: row.id,
+      authorId:
+        typeof row.data?.authorId === 'string'
+          ? row.data.authorId
+          : row.author_id ?? undefined,
+    } as T;
+  });
+},
     async syncList<T extends ListItem>(coll: string, prev: T[], next: T[], uid: string | null) {
       const { inserts, updates, moves, deletes } = diffList(prev, next);
       const toRow = ({ item, sort }: { item: T; sort: number }) => {

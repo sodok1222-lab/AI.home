@@ -175,6 +175,7 @@ function RoadviewPageInner() {
   const [menuSet] = useMenuSettings();
   const allow = (p: MenuPerm) => (p === 'admin' ? isAdmin : p === 'member' ? !!user : true);
   const [itemsAll, setItemsAll, roadLoaded] = useLocalList<RoadItem>('ohome.road.v1', ROAD_SEED);
+  const [visibility, setVisibility] = useState<Visibility>('public');
   // 여러 개로 만든 섹션 (v2.0) — 주소의 ?s= 가 가리키는 것만 보여 준다
   const sec = useSectionParam('roadview');
   const items = filterSection(itemsAll, sec.id);
@@ -212,6 +213,7 @@ function RoadviewPageInner() {
     const imgId = await putBlob(f); // IndexedDB 실저장 — 새로고침에도 유지
     const it: RoadItem = {
       id: newId(), title: '', author: user!.nickname, authorId: user!.id,
+      visibility,
       date: new Date().toISOString(), imgId, ph: '', ratio: 'auto',
       fold: null, comments: [],
       no: nextNo,   // 번호 자동 부여 (v1.9)

@@ -21,12 +21,17 @@ export default function TCharsPage() {
   const [q, setQ] = useState('');
 
   const query = q.trim().toLowerCase();
-  const shown = tchars.filter(c => !query
+  const shown = tchars
+  .filter(c =>
+    c.visibility === 'public' ||
+    (c.visibility === 'member' && !!user) ||
+    (c.visibility === 'private' && c.authorId === user?.id)
+  )
+  .filter(c => !query
     || c.name.toLowerCase().includes(query)
     || c.scenario.toLowerCase().includes(query)
     || c.rule.toLowerCase().includes(query)
     || c.role.toLowerCase().includes(query));
-
   // 편집모드 카드 드래그 정렬 (v1.9) — 훅이므로 early return보다 먼저
   const sort = useCardSort(shown, next => setTchars(mergeOrder(tchars, next)), editOn && isAdmin);
 

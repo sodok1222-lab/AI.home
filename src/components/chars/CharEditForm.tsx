@@ -316,15 +316,13 @@ export function CharEditForm({ initial, onSave, onCancel, auMode, existingIds }:
               <button className={themeMode === 'default' ? 'on' : ''} onClick={() => setThemeMode('default')}>기존 테마 따르기</button>
               <button className={themeMode === 'custom' ? 'on' : ''} onClick={() => setThemeMode('custom')}>캐릭터 테마색</button>
             </div>
-            {/* 공개범위는 base 소관 — AU 편집에선 숨김 (v1.9) */}
-            {!auMode && (
-              <KSelect value={visibility} onChange={v => setVisibility(v as Visibility)}
-                options={[
-                  { value: 'public', label: '전체공개' },
-                  { value: 'member', label: '멤버공개' },
-                  { value: 'private', label: '나만보기' },
-                ]} />
-            )}
+         {/* 공개범위 */}
+<KSelect value={visibility} onChange={v => setVisibility(v as Visibility)}
+  options={[
+    { value: 'public', label: '전체공개' },
+    { value: 'member', label: '멤버공개' },
+    { value: 'private', label: '나만보기' },
+  ]} />
             {/* 설명은 드롭다운 **위에** (v2.0 사용자 요청 — 자관 폼과 같은 배치) */}
             <p className="hint" style={{ margin: '2px 0 0' }}>이름 폰트 — 리스트·상세 이름에 적용</p>
             <KSelect value={fontId} onChange={setFontId}

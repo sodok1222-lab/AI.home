@@ -23,7 +23,7 @@ export default function TCharsPage() {
   const query = q.trim().toLowerCase();
   const shown = tchars
   .filter(c =>
-    c.visibility === 'public' ||
+    c.visibility === undefined || c.visibility === 'public' ||
     (c.visibility === 'member' && !!user) ||
     (c.visibility === 'private' && c.authorId === user?.id)
   )

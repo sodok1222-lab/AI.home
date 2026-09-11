@@ -40,7 +40,7 @@ export function CharEditForm({ initial, onSave, onCancel, auMode, existingIds }:
   existingIds?: string[];                  // 페이지 주소 중복 검사용 (v1.9 — 신규 등록)
 }) {
   const { fonts, familyOf } = useFonts();
-  const { isAdmin } = useAuth();
+  const { user, isAdmin } = useAuth();
   const toast = useToast();
   const isNew = !initial;
 

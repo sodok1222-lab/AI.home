@@ -237,7 +237,9 @@ function TrpgPageInner() {
   const Ticket = ({ l }: { l: TrpgLog }) => (
     <div className="ticket"
       onContextMenu={e => openOrder(e, l.id)}
-      onClick={() => { if (!editOn) router.push(`/trpg/${l.id}`); }}>
+      onClick={() => {
+        if (!editOn || (isAdmin && l.listHidden)) router.push(`/trpg/${l.id}`);
+      }}>
       <div className="stub-line" />
       <div className={`wide ${!l.thumbId && !l.thumbColor ? `ph ${l.ph}` : ''}`} style={thumbStyle(l)}>
         {l.thumbId && <CroppedBlobImg fileRef={l.thumbId} crop={l.thumbCrop} />}
@@ -294,7 +296,9 @@ function TrpgPageInner() {
                   // 드래그 위치는 전체 기준으로 넘긴다 — 페이지 안 위치로 넘기면 2페이지에서 어긋난다
                   <div key={l.id} className="list-item" {...gridDragProps(logStart + i)}
                     onContextMenu={e => openOrder(e, l.id)}
-                    onClick={() => { if (!editOn) router.push(`/trpg/${l.id}`); }}>
+                    onClick={() => {
+                      if (!editOn || (isAdmin && l.listHidden)) router.push(`/trpg/${l.id}`);
+                    }}>
                     {editOn && <span className="drag-h">⠿</span>}
                     <div className={`th ${!l.thumbId && !l.thumbColor ? `ph ${l.ph}` : ''}`} style={{ ...thumbStyle(l), position: 'relative' }}>
                       {l.thumbId && <CroppedBlobImg fileRef={l.thumbId} crop={l.thumbCrop} />}

@@ -14,7 +14,7 @@ import { useCardSort, mergeOrder } from '@/lib/cardSort';
 
 export default function TCharsPage() {
   const router = useRouter();
-  const { isAdmin } = useAuth();
+  const { isAdmin, user } = useAuth();
   const { editOn } = useMainStore();
   const del = useConfirmDelete();
   const [tchars, setTchars, loaded] = useLocalList<TrpgChar>('ohome.tchars.v1', TCHAR_SEED);

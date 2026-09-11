@@ -47,7 +47,11 @@ function CharsInner() {
 
   const visible = chars
     .filter(c => c.own)
-    .filter(c => isAdmin || c.visibility === 'public')
+    .filter(c =>
+  c.visibility === 'public' ||
+  (c.visibility === 'member' && !!user) ||
+  (c.visibility === 'private' && c.authorId === user?.id)
+)
     .filter(c => !q || c.name.toLowerCase().includes(q.toLowerCase()) || c.sub.includes(q));
 
   // 편집모드 카드 드래그 정렬 (v1.9)

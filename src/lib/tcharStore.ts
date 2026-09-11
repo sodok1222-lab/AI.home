@@ -23,8 +23,10 @@ export interface TrpgChar {
   imgMode?: 'stamp' | 'standing';
   crop?: import('@/components/ui/CropEditor').CropValue; // 스탠딩 공유 썸네일 위치
   stdW?: number; stdH?: number; // 스탠딩 기준 크기 (업로드 검증용)
-  faces: TrpgFace[];         // 첫 번째가 대표 인장
+    faces: TrpgFace[];         // 첫 번째가 대표 인장
   ph: string;
+  visibility: import('@/lib/charStore').Visibility; // 공개범위
+  authorId?: string;                              // 만든 회원
 }
 
 /** 표정의 썸네일 크롭 — 스탠딩이면 공유 크롭, 단일 인장이면 개별 크롭 */

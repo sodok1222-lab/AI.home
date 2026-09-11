@@ -18,7 +18,7 @@ import { useCardSort, mergeOrder } from '@/lib/cardSort';
 
 function CharsInner() {
   const router = useRouter();
-  const { isAdmin } = useAuth();
+  const { user, isAdmin } = useAuth();
   const toast = useToast();
   const { editOn } = useMainStore();
   const [charsAll, setCharsAll] = useLocalList<Character>('ohome.chars.v1', CHAR_SEED);

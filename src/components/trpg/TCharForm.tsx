@@ -8,7 +8,7 @@ import { useLocalList, newId } from '@/lib/postStore';
 import { TrpgChar, TrpgFace, TCHAR_SEED } from '@/lib/tcharStore';
 import { putBlob, getBlob, useBlobUrl } from '@/lib/blobStore';
 import { CropEditor, CropImg, CropValue } from '@/components/ui/CropEditor';
-import { KInput } from '@/components/ui/Kit';
+import { KInput, KSelect } from '@/components/ui/Kit';
 import { RichEditor } from '@/components/ui/RichEditor';
 import { DragList } from '@/components/ui/DragList';
 import { Modal, useConfirmDelete } from '@/components/ui/Modal';

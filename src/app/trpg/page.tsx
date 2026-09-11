@@ -307,7 +307,7 @@ function TrpgPageInner() {
                       if (!editOn || (isAdmin && l.listHidden)) {
                        router.push(`/trpg/${l.id}?s=${encodeURIComponent(sec.id)}`);
                        }
-                     }}
+                     }}>
                     {editOn && <span className="drag-h">⠿</span>}
                     <div className={`th ${!l.thumbId && !l.thumbColor ? `ph ${l.ph}` : ''}`} style={{ ...thumbStyle(l), position: 'relative' }}>
                       {l.thumbId && <CroppedBlobImg fileRef={l.thumbId} crop={l.thumbCrop} />}

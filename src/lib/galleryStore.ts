@@ -13,6 +13,7 @@ export interface RoadItem {
   title: string;
   author: string;
   authorId: string;
+  visibility: Visibility;
   date: string;              // ISO
   imgUrl?: string;           // (구) URL — 새 업로드는 imgId 사용
   imgId?: string;            // IndexedDB 파일 id (blobStore — 새로고침에도 유지)

@@ -105,7 +105,7 @@ function CharDetailInner() {
       </section>
     );
   }
-  if (ch.visibility === 'private' && ch.authorId !== user?.id) {
+  if (ch.visibility === 'private' && !isAdmin) {
     return (
       <section className="page">
         <div className="page-head"><PageTitle href={tt.href}>{tt.title}</PageTitle><p>비공개 캐릭터입니다</p></div>

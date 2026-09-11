@@ -24,7 +24,7 @@ function StandingImg({ imgId, ph }: { imgId?: string; ph: string }) {
 export default function TCharDetailPage() {
   const { id } = useParams<{ id: string }>();
   const router = useRouter();
-  const { isAdmin } = useAuth();
+  const { isAdmin, user } = useAuth();
   const [tchars, setTchars, loaded] = useLocalList<TrpgChar>('ohome.tchars.v1', TCHAR_SEED);
   const [faceIdx, setFaceIdx] = useState(0);
   const [delAsk, setDelAsk] = useState(false);
@@ -36,6 +36,19 @@ export default function TCharDetailPage() {
     return (
       <section className="page">
         <div className="page-head"><PageTitle>TRPG CHARACTERS</PageTitle><p>캐릭터를 찾을 수 없습니다</p></div>
+      </section>
+    );
+  }
+    if (
+      c.visibility === 'member' && !user ||
+      c.visibility === 'private' && c.authorId !== user?.id
+  ) {
+    return (
+      <section className="page">
+        <div className="page-head">
+          <PageTitle>TRPG CHARACTERS</PageTitle>
+          <p>비공개 캐릭터입니다 — 열람 권한이 없습니다</p>
+        </div>
       </section>
     );
   }

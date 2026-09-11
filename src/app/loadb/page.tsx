@@ -8,7 +8,8 @@ import {
   CommentRow, COMMENT_KEY, COMMENT_SEED, commentsFor,
 } from '@/lib/postStore';
 import { RoadItem, ROAD_SEED } from '@/lib/galleryStore';
-import { SearchBar, KInput } from '@/components/ui/Kit';
+import type { Visibility } from '@/lib/charStore';
+import { SearchBar, KInput, KSelect, KLabel } from '@/components/ui/Kit';
 import { putBlob, useBlobUrl } from '@/lib/blobStore';
 import { Modal, ConfirmModal, useConfirmDelete } from '@/components/ui/Modal';
 import { EditableDesc, PageTitle } from '@/components/ui/PageText';

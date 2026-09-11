@@ -55,7 +55,7 @@ export default function TrpgDetailPage() {
   const frameRef = useRef<HTMLIFrameElement>(null);
   const gotHeightRef = useRef(false);   // 안쪽에서 높이 보고가 왔는지 (안 오면 기본 높이로 되돌린다)
 
-  const l = logs.find(x => x.id === id);
+  const l = logsAll.find(x => x.id === id);
   /* 이 글이 속한 곳이 비공개면 주소로 들어와도 열리지 않게 (v2.0 사용자 요청).
      글 주소에는 섹션이 없어 MenuGuard가 못 막는다 — 글을 읽어 소속을 알아낸 여기서 판정한다.
      **다른 early return보다 먼저 불러야 한다**(훅이므로 렌더마다 개수가 같아야 한다) */

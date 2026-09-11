@@ -6,6 +6,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useLocalList, newId } from '@/lib/postStore';
 import { TrpgChar, TrpgFace, TCHAR_SEED } from '@/lib/tcharStore';
+import type { Visibility } from '@/lib/charStore';
+import { useAuth } from '@/lib/auth';
 import { putBlob, getBlob, useBlobUrl } from '@/lib/blobStore';
 import { CropEditor, CropImg, CropValue } from '@/components/ui/CropEditor';
 import { KInput, KSelect } from '@/components/ui/Kit';
@@ -68,6 +70,7 @@ function FaceCropModal({ f, initial, onClose, onApply }: {
 
 export function TCharForm({ editId }: { editId?: string }) {
   const router = useRouter();
+  const { user } = useAuth();
   const toast = useToast();
   const del = useConfirmDelete();
   const [tchars, setTchars, loaded] = useLocalList<TrpgChar>('ohome.tchars.v1', TCHAR_SEED);
@@ -78,6 +81,7 @@ export function TCharForm({ editId }: { editId?: string }) {
   const [rule, setRule] = useState(orig?.rule ?? '');
   const [role, setRole] = useState(orig?.role ?? '');
   const [desc, setDesc] = useState(orig?.desc ?? '');
+  const [visibility, setVisibility] = useState<Visibility>(orig?.visibility ?? 'public');
   const [imgMode, setImgMode] = useState<'stamp' | 'standing'>(orig?.imgMode ?? 'stamp');
   const [sharedCrop, setSharedCrop] = useState<CropValue | undefined>(orig?.crop);
   const [stdDims, setStdDims] = useState<{ w: number; h: number } | null>(
@@ -99,6 +103,7 @@ export function TCharForm({ editId }: { editId?: string }) {
     hydrated.current = true;
     setName(o.name); setScenario(o.scenario ?? ''); setRule(o.rule ?? ''); setRole(o.role ?? '');
     setDesc(o.desc ?? '');
+    setVisibility(o.visibility ?? 'public');
     setImgMode(o.imgMode ?? 'stamp');
     setSharedCrop(o.crop);
     setStdDims(o.stdW && o.stdH ? { w: o.stdW, h: o.stdH } : null);
@@ -162,6 +167,8 @@ export function TCharForm({ editId }: { editId?: string }) {
     const patch = {
       name: name.trim(), scenario: scenario.trim(), rule: rule.trim(), role: role.trim(),
       desc, faces: outFaces, imgMode,
+      visibility,
+      authorId: orig?.authorId ?? user?.id,
       crop: imgMode === 'standing' ? sharedCrop : undefined,
       stdW: imgMode === 'standing' ? stdDims?.w : undefined,
       stdH: imgMode === 'standing' ? stdDims?.h : undefined,
@@ -202,6 +209,19 @@ export function TCharForm({ editId }: { editId?: string }) {
         </div>
       </div>
 
+      <div>
+        <label className="k-label" style={{ marginBottom: 5 }}>공개범위</label>
+        <KSelect
+          value={visibility}
+          onChange={v => setVisibility(v as Visibility)}
+          options={[
+            { value: 'public', label: '전체공개' },
+            { value: 'member', label: '멤버공개' },
+            { value: 'private', label: '나만보기' },
+          ]}
+        />
+      </div>
+      
       {/* 이미지 방식 + 표정 목록 */}
       <div>
         <label className="k-label" style={{ marginBottom: 7 }}>이미지 방식</label>

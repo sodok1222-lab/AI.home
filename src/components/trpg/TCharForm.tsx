@@ -177,7 +177,7 @@ export function TCharForm({ editId }: { editId?: string }) {
       setTchars(tchars.map(c => c.id === orig.id ? { ...c, ...patch } : c));
       toast('저장되었습니다');
     } else {
-  setTchars([{ id: newId(), ph: 'cool', visibility: 'public', ...patch }, ...tchars]);
+  setTchars([{ id: newId(), ph: 'cool', ...patch }, ...tchars]);
   toast('캐릭터가 등록되었습니다');
 }
     router.push('/tchars');

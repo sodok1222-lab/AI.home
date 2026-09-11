@@ -246,6 +246,11 @@ const baseAllowed = !!l && (
   // 막힌 곳이면 여기서 되돌아간다 — 훅을 모두 부른 뒤여야 렌더마다 개수가 같다
   if (blocked) return blocked;
   if (!loaded || !l) return <section className="page" />;
+
+  if (l.visibility === 'private' && !isPrivateOwner) {
+    return <section className="page" />;
+  }
+  
   if (!baseAllowed && !unlocked) {
     if (!l.password) return <section className="page" />;
     // 비밀번호 게이트 — 맞으면 이 세션 동안 열람 유지

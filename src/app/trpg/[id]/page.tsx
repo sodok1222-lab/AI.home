@@ -71,8 +71,16 @@ export default function TrpgDetailPage() {
     const ch = allChars.find(c => c.id === m.charId);
     return ch ? !!charGrant(ch, user.id) : false;
   });
-  const baseAllowed = !!l && (isAdmin || isRelPartner
-    || l.visibility === 'public' || (l.visibility === 'member' && !!user));
+  const isPrivateOwner =
+  l?.visibility === 'private' &&
+  !!l.authorId &&
+  l.authorId === user?.id;
+
+const baseAllowed = !!l && (
+  l.visibility === 'public' ||
+  (l.visibility === 'member' && !!user) ||
+  isPrivateOwner
+);
 
   // 비밀번호 열람 (4.3) — 세션 동안 유지
   const [unlocked, setUnlocked] = useState(false);

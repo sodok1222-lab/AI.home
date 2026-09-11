@@ -148,7 +148,7 @@ export async function createSupabaseBackend(
         typeof row.data?.authorId === 'string'
           ? row.data.authorId
           : row.author_id ?? undefined,
-    } as T;
+        } as unknown as T;
   });
 },
     async syncList<T extends ListItem>(coll: string, prev: T[], next: T[], uid: string | null) {

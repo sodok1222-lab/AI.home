@@ -158,6 +158,7 @@ const baseAllowed = !!l && (
     }
     const nextLog: TrpgLog = {
       ...(l as TrpgLog),
+      authorId: l?.authorId ?? user?.id,
       noText: e.noText.trim() || undefined,
       title: e.title.trim(), catchphrase: e.catchphrase.trim() || undefined,
       writer: e.writer.trim(), withText: e.withText.trim(),

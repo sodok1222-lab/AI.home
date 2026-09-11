@@ -77,6 +77,7 @@ export default function TrpgDetailPage() {
   l.authorId === user?.id;
 
 const baseAllowed = !!l && (
+  l.visibility === undefined ||
   l.visibility === 'public' ||
   (l.visibility === 'member' && !!user) ||
   isPrivateOwner

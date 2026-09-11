@@ -108,6 +108,7 @@ export function CharEditForm({ initial, onSave, onCancel, auMode, existingIds }:
       tabs,   // 제목이 비어도 유지 — 필터로 사라지던 버그 수정 (v1.9 사용자 지적)
       basicHtml,
       visibility,
+      authorId: initial?.authorId ?? user?.id,
       fontId,
       nameSize,
       nameBold,

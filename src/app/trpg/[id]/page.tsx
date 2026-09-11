@@ -96,6 +96,7 @@ const baseAllowed = !!l && (
     if (!loaded) return;
     if (!l) { router.replace('/'); return; }
     if (!baseAllowed && !unlocked && !l.password) router.replace('/');
+    if (l.visibility === 'private' && !isPrivateOwner) router.replace('/');
   }, [loaded, l, baseAllowed, unlocked, router]);
   const tryUnlock = () => {
     if (l?.password && pwTry === l.password) {

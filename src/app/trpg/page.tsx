@@ -190,6 +190,7 @@ function TrpgPageInner() {
     const bodyText = nFile ? await decodeText(nFile) : nBody;
     const log: TrpgLog = {
       id,
+      authorId: user?.id,
       no: Math.max(0, ...logs.map(l => l.no)) + 1, // 내부 순번 (정렬용)
       noText: nNo.trim() || undefined,             // № 자리 표시 텍스트 — 비우면 자동 № 0XX
       title: nTitle.trim(), catchphrase: nCatch.trim() || undefined,

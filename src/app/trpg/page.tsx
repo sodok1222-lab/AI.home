@@ -86,7 +86,11 @@ function TrpgPageInner() {
   // 목록에 뜰지는 오직 listHidden — 접근권한(visibility)은 "누가 열 수 있는지"만 정하고
   // 목록에 나오는지는 정하지 않는다 (v2.0 사용자 확정: "나만보기여도 목록에는 표시돼야해").
   // 열 수 있는지는 상세 페이지가 다시 독립적으로 확인하므로, 목록에 뜬다고 내용이 새지 않는다
-  const canOpen = (l: TrpgLog) => isAdmin || l.visibility === 'public' || (l.visibility === 'member' && !!user);
+  const canOpen = (l: TrpgLog) =>
+  l.visibility === 'public' ||
+  (l.visibility === 'member' && !!user) ||
+  (l.visibility === 'private' && !!l.authorId && l.authorId === user?.id);
+  
   const visible = logs
     // 목록 숨김 — 관리자도 편집모드가 아니면 안 보인다(목록을 정리해 두는 용도라, v2.0 사용자 요청).
     // 편집모드에서는 관리자에게만 예외로 보여 되돌릴 수 있게 한다

@@ -33,6 +33,7 @@ export interface Character {
   tabs: CharTab[];       // 기본 정보 외 추가 탭
   basicHtml: string;     // 기본 정보 탭의 소개 본문 (HTML)
   visibility: Visibility;
+  authorId?: string;     // 캐릭터를 만든 회원
   /** 페이지 주소 별명 (v2.0 사용자 요청) — /chars/{별명}. 만들 때 정하는 주소(id)와 달리
    *  **나중에 수정 화면에서 바꿀 수 있다.** 참조(자관 멤버·권한 등)는 언제나 id로 저장되므로
    *  바꿔도 아무것도 끊어지지 않고, 옛 주소(id)로도 계속 열린다. */

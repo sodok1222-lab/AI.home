@@ -73,6 +73,7 @@ export interface TrpgLog {
   thumbColor?: { c1: string; c2?: string }; // 이미지 없을 때 단색/그라데이션
   serifTitle?: boolean;      // 타이틀 폰트 개별 지정 예시 (폰트 라이브러리는 후속)
   visibility: Visibility;
+  authorId?: string;          // 작성자 ID — 나만보기(private) 열람 권한 확인용
   password?: string;         // 열람 비밀번호 (선택) — 권한이 없어도 비밀번호로 열람 가능
   // 목록 표시 여부 (v2.0 사용자 요청) — 접근권한(누가 열 수 있는지)과는 별개로, 목록에 줄이 뜰지만 정하는
   // 스위치. 나만보기(private)여도 이걸 켜지 않으면 관리자 목록에서 사라지지 않는다 — 반대로 이걸 켜면

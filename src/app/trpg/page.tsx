@@ -94,9 +94,12 @@ function TrpgPageInner() {
   const visible = logs
     // 목록 숨김 — 관리자도 편집모드가 아니면 안 보인다(목록을 정리해 두는 용도라, v2.0 사용자 요청).
     // 편집모드에서는 관리자에게만 예외로 보여 되돌릴 수 있게 한다
-    .filter(l => !l.listHidden || (isAdmin && editOn))
-    .filter(l => filter === 'all' || (filter === 'none' ? !l.relId : l.relId === filter))
-    .filter(l => !q || l.title.includes(q) || l.writer.includes(q) || l.withText.includes(q));
+      .filter(l =>
+    (l.listHidden && isAdmin && editOn) ||
+    (!l.listHidden && canOpen(l))
+  )
+  .filter(l => filter === 'all' || (filter === 'none' ? !l.relId : l.relId === filter))
+  .filter(l => !q || l.title.includes(q) || l.writer.includes(q) || l.withText.includes(q));
   // 정렬 기준은 저장된 순서 — 편집모드에서 드래그로 바꾼 순서가 그대로 목록에 반영된다 (v2.0).
   // 새 로그는 앞에 넣으므로 기본은 지금까지처럼 최신순이고, № 번호는 표시용으로만 남는다.
 

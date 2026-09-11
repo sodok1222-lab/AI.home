@@ -205,6 +205,7 @@ function RoadviewPageInner() {
   const [editFor, setEditFor] = useState<RoadItem | null>(null);
   const [eNo, setENo] = useState('');      // 번호 수정 (v1.9 — 제목 없이 번호만 쓰는 체계)
   const [eAdult, setEAdult] = useState(false);
+  const [eVisibility, setEVisibility] = useState<Visibility>('public');
   const [delFor, setDelFor] = useState<RoadItem | null>(null);
 
   // 즉시 업로드 (v1.7) — IndexedDB 실저장 (R2 연동 시 서버로 이전)
@@ -278,7 +279,13 @@ function RoadviewPageInner() {
   const editLevel = (c: Comment): 'free' | null => (user && c.authorId === user.id ? 'free' : null);
   const delLevel = (c: Comment): 'free' | null => (isAdmin || (user && c.authorId === user.id) ? 'free' : null);
 
-  const visible = items.filter(it => !q || it.author.includes(q)
+  const visible = items
+  .filter(it =>
+    it.visibility === 'public' ||
+    (it.visibility === 'member' && !!user) ||
+    (it.visibility === 'private' && it.authorId === user?.id)
+  )
+  .filter(it => !q || it.author.includes(q)
     || padNo(it.no).includes(q) || String(it.no ?? '').includes(q));
 
   return (
@@ -293,6 +300,16 @@ function RoadviewPageInner() {
                 onChange={e => { upload(e.target.files?.[0]); e.target.value = ''; }} />
               <button className="btn btn-dark" onClick={() => fileRef.current?.click()}
                 {...fileDrop(fl => upload(fl[0]))}>↑ UPLOAD</button>
+              <KSelect
+  minWidth={130}
+  value={visibility}
+  onChange={v => setVisibility(v as Visibility)}
+  options={[
+    { value: 'public', label: '전체공개' },
+    { value: 'member', label: '멤버공개' },
+    { value: 'private', label: '나만보기' },
+  ]}
+/>
             </>
           )}
           <SearchBar onSearch={setQ} />
@@ -309,7 +326,7 @@ function RoadviewPageInner() {
              손님이 올린 것은 이제 관리자만 손댈 수 있다(손님 확인 수단이 없다) */
           canEditItem={!!it.authorId && it.authorId === user?.id}
           canDeleteItem={isAdmin || (!!it.authorId && it.authorId === user?.id)}
-          onEdit={() => { setEditFor(it); setENo(String(it.no ?? '')); setEAdult(it.fold?.type === 'adult'); }}
+          onEdit={() => { setEditFor(it); setENo(String(it.no ?? '')); setEAdult(it.fold?.type === 'adult'); setEVisibility(it.visibility ?? 'public'); }}
           onDelete={() => setDelFor(it)} />
       ))}
       {visible.length === 0 && (
@@ -330,7 +347,7 @@ function RoadviewPageInner() {
           <button className="btn btn-dark" onClick={() => {
             const nv = parseInt(eNo, 10);
             setItems(items.map(x => x.id === editFor!.id
-              ? { ...x, no: Number.isFinite(nv) && nv > 0 ? nv : x.no, fold: eAdult ? { type: 'adult' } : null } : x));
+              ? { ...x, no: Number.isFinite(nv) && nv > 0 ? nv : x.no, fold: eAdult ? { type: 'adult' } : null, visibility: eVisibility } : x));
             setEditFor(null);
           }}>SAVE</button>
         </>}>
@@ -341,6 +358,19 @@ function RoadviewPageInner() {
               style={{ width: 90, textAlign: 'center' }} />
           </div>
           <KCheck label="수위 주의 접기 (블러 + 클릭 표시)" checked={eAdult} onChange={setEAdult} />
+<div>
+  <KLabel>공개범위</KLabel>
+  <KSelect
+    minWidth={130}
+    value={eVisibility}
+    onChange={v => setEVisibility(v as Visibility)}
+    options={[
+      { value: 'public', label: '전체공개' },
+      { value: 'member', label: '멤버공개' },
+      { value: 'private', label: '나만보기' },
+    ]}
+  />
+</div>
         </div>
       </Modal>
 

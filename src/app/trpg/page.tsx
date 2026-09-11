@@ -242,8 +242,11 @@ function TrpgPageInner() {
   const Ticket = ({ l }: { l: TrpgLog }) => (
     <div className="ticket"
       onContextMenu={e => openOrder(e, l.id)}
-     onClick={() => (!editOn || (isAdmin && l.listHidden))
-       && router.push(`/trpg/${l.id}?s=${encodeURIComponent(sec.id)}`)}
+     onClick={() => {
+  if (!editOn || (isAdmin && l.listHidden)) {
+    router.push(`/trpg/${l.id}?s=${encodeURIComponent(sec.id)}`);
+  }
+}}
       <div className="stub-line" />
       <div className={`wide ${!l.thumbId && !l.thumbColor ? `ph ${l.ph}` : ''}`} style={thumbStyle(l)}>
         {l.thumbId && <CroppedBlobImg fileRef={l.thumbId} crop={l.thumbCrop} />}

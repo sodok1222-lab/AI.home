@@ -58,18 +58,32 @@ export function DiaryForm({ initial, moods, setMoods, onSave, onCancel }: {
           <KInput placeholder="제목" value={title} onChange={e => setTitle(e.target.value)} style={{ flex: 1 }} />
           <KDate value={date} onChange={setDate} style={{ maxWidth: 130 }} />
         </div>
-        <div>
-          <label className="k-label" style={{ marginBottom: 6 }}>무드</label>
-          
-<button
-  type="button"
-  className="btn btn-ghost"
-  style={{ marginLeft: 8, padding: '3px 9px', fontSize: 11 }}
->
-  ＋ 무드 관리
-</button>
+       <div>
+  <div
+    style={{
+      display: 'flex',
+      alignItems: 'center',
+      gap: 8,
+      marginBottom: 8,
+    }}
+  >
+    <label className="k-label" style={{ margin: 0 }}>
+      무드
+    </label>
 
-          <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap' }}>
+    <button
+      type="button"
+      className="btn btn-ghost"
+      style={{
+        padding: '3px 9px',
+        fontSize: 11,
+      }}
+    >
+      ＋ 무드 관리
+    </button>
+  </div>
+
+  <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap' }}>
             {moods.map(m => (
               <button key={m.id}
                 className="mood-pick"

@@ -32,7 +32,7 @@ const items = sectionItems.filter(it => {
   if (visibility === 'public') return true;
   if (visibility === 'member') return !!user;
   if (visibility === 'private') {
-    return isAdmin || it.authorId === user?.id;
+    return isAdmin;
   }
 
   return true;

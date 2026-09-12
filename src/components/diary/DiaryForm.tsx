@@ -407,7 +407,7 @@ export function DiaryForm({
                     style={{
                       display: 'grid',
                       gridTemplateColumns:
-                        '36px minmax(90px, 1fr) 58px 44px 28px',
+                        '36px minmax(90px, 1fr) 82px 44px 28px',
                       gap: 7,
                       alignItems: 'center',
                     }}

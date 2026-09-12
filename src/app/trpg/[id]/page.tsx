@@ -432,7 +432,7 @@ html,body{margin:0!important;padding:0!important;height:auto!important;min-heigh
           <button className="btn btn-ghost" onClick={() => setEOpen(false)}>CANCEL</button>
           <button className="btn btn-dark" onClick={saveEdit}>SAVE</button>
         </>}>
-        <div style={{ display: 'grid', gap: 9 }}>
+        <div className="trpg-log-editor" style={{ display: 'grid', gap: 9 }}>
           <div style={{ display: 'flex', gap: 8 }}>
             <KInput placeholder="시나리오 타이틀 (필수)" value={e.title} onChange={ev => setE(s => ({ ...s, title: ev.target.value }))} />
             {/* № 자리 표시 텍스트 전체를 직접 입력 — 비우면 자동 № 0XX */}

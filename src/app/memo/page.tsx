@@ -128,6 +128,7 @@ export default function MemoPage() {
       const m: StickyMemo = {
         id: newId(), text: mText.trim(),
         author: user?.nickname ?? '관리자', authorId: user?.id ?? 'admin',
+        visibility: mVisibility,
         color: mColor, size: mSize,
         x: 6 + Math.random() * 55, y: 6 + Math.random() * 55,
         rot: Math.round((Math.random() * 6 - 3) * 10) / 10, // 랜덤 기울기 (4.6)

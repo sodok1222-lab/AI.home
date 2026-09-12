@@ -120,8 +120,11 @@ export default function MemoPage() {
   const save = () => {
     if (!mText.trim()) { toast('내용을 입력해 주세요'); return; }
     if (mId) {
-      setMemos(memos.map(m => m.id === mId ? { ...m, text: mText.trim(), color: mColor, size: mSize } : m));
-    } else {
+     setMemos(memos.map(m => m.id === mId
+       ? { ...m, text: mText.trim(), color: mColor, size: mSize, visibility: mVisibility }
+       : m
+   ));
+} else {
       const m: StickyMemo = {
         id: newId(), text: mText.trim(),
         author: user?.nickname ?? '관리자', authorId: user?.id ?? 'admin',

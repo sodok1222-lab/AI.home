@@ -34,6 +34,7 @@ export default function DiaryEditPage() {
     <section className="page">
       <div className="page-head"><PageTitle href={tt.href}>{tt.title}</PageTitle><p>{p.title}</p></div>
       <DiaryForm initial={p} moods={moods}
+        setMoods={setMoods}
         onCancel={() => router.push('/diary')}
         onSave={v => {
           setPosts(posts.map(x => (x.id === p.id ? { ...x, ...v } : x)));

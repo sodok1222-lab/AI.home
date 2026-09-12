@@ -10,6 +10,7 @@ import { useToast } from '@/components/ui/Toast';
 export interface DotoriFormValue {
   name: string; writer: string; rule: string; people: string;
   tags: string[]; link?: string; status: DotoriStatus;
+  visibility: 'public' | 'member' | 'private';
   imgId?: string; thumbCrop?: CropValue;
 }
 
@@ -29,7 +30,10 @@ export function DotoriForm({ initial, onSave, onCancel }: {
   const [link, setLink] = useState(initial?.link ?? '');
   // 새로 담는 시나리오는 대개 아직 일정이 없다 — 기본값을 「일정 미정」으로 (사용자 확정)
   const [status, setStatus] = useState<DotoriStatus>(initial?.status ?? 'undecided');
-  const [file, setFile] = useState<File | null>(null);
+const [visibility, setVisibility] = useState<'public' | 'member' | 'private'>(
+  initial?.visibility ?? 'public'
+);
+const [file, setFile] = useState<File | null>(null);
   const [fileUrl, setFileUrl] = useState('');
   const [removed, setRemoved] = useState(false);
   const [crop, setCrop] = useState<CropValue | undefined>(initial?.thumbCrop);
@@ -40,7 +44,7 @@ export function DotoriForm({ initial, onSave, onCancel }: {
     onSave({
       name: name.trim(), writer: writer.trim(), rule: rule.trim(), people: people.trim(),
       tags: tags.split(',').map(t => t.trim()).filter(Boolean),
-      link: link.trim() || undefined, status,
+      link: link.trim() || undefined, status, visibility,
       imgId: file ? await putBlob(file) : (removed ? undefined : initial?.imgId),
       thumbCrop: crop,
     });
@@ -93,6 +97,17 @@ export function DotoriForm({ initial, onSave, onCancel }: {
             <KInput placeholder="링크 (선택)" value={link} onChange={e => setLink(e.target.value)} />
             <KSelect value={status} onChange={v => setStatus(v as DotoriStatus)}
               options={DOTORI_STATUS_KEYS.map(s => ({ value: s, label: trpgSet.statuses[s].label }))} />
+
+ <KSelect
+  value={visibility}
+  onChange={v => setVisibility(v as 'public' | 'member' | 'private')}
+  options={[
+    { value: 'public', label: '전체공개' },
+    { value: 'member', label: '멤버공개' },
+    { value: 'private', label: '나만보기' },
+  ]}
+/>
+            
             <p className="hint" style={{ margin: 0 }}>뱃지는 공수표·일정 확정만 카드에 표시 — 완은 완 탭에서만 보입니다</p>
           </div>
         </div>

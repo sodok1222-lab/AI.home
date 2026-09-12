@@ -257,7 +257,7 @@ const baseAllowed = !!l && (
     if (!l.password) return <section className="page" />;
     // 비밀번호 게이트 — 맞으면 이 세션 동안 열람 유지
     return (
-      <section className="page">
+       <section className="page trpg-log-page">
         {/* 안내 문구는 환경설정 > TRPG에서 수정 — 관리자는 이 화면을 볼 수 없다 */}
         <div className="page-head"><PageTitle href={tt.href}>{tt.title}</PageTitle>
           <EditableDesc k="trpg-lock-desc" def="비밀번호를 입력하면 열람할 수 있습니다" always /></div>

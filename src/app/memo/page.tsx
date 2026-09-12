@@ -163,7 +163,15 @@ export default function MemoPage() {
         {/* 보드 — 배치·순서 저장, 모두에게 동일 (4.6) */}
         <div className="memoboard" ref={boardRef}
           onContextMenu={e => { if (!(e.target as Element).closest('.postit')) setCtx(null); }}>
-          {memos.map(m => (
+          {memos.filter(m => {
+  const visibility = m.visibility ?? 'public';
+
+  if (visibility === 'public') return true;
+  if (visibility === 'member') return !!user;
+  if (visibility === 'private') return isAdmin;
+
+  return true;
+}).map(m => (
             <div key={m.id}
               className={`postit ${focusId === m.id ? 'hl' : ''} ${canTouch(m) ? '' : 'ro'}`}
               style={{

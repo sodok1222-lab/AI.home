@@ -8,6 +8,7 @@ import { KInput, KTextarea, KSelect, KDate } from '@/components/ui/Kit';
 import { DragList } from '@/components/ui/DragList';
 import { useConfirmDelete } from '@/components/ui/Modal';
 import { putBlob, useBlobUrl } from '@/lib/blobStore';
+import { BlobImg } from '@/lib/blobStore';
 import { useToast } from '@/components/ui/Toast';
 
 export interface DiaryFormValue {

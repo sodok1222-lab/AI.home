@@ -729,4 +729,3 @@ export function DiaryForm({
     </div>
   );
 }
-```

@@ -25,9 +25,10 @@ function ImgThumb({ item }: { item: ImgItem }) {
   return src ? <img src={src} alt="" style={{ width: 64, height: 48, objectFit: 'cover', borderRadius: 6 }} /> : null;
 }
 
-export function DiaryForm({ initial, moods, onSave, onCancel }: {
+export function DiaryForm({ initial, moods, setMoods, onSave, onCancel }: {
   initial: DiaryPost | null;
   moods: Mood[];
+  setMoods: React.Dispatch<React.SetStateAction<Mood[]>>;
   onSave: (v: DiaryFormValue) => void;
   onCancel: () => void;
 }) {

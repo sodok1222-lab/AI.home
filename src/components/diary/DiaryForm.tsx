@@ -75,6 +75,7 @@ export function DiaryForm({ initial, moods, setMoods, onSave, onCancel }: {
     <button
       type="button"
       className="btn btn-ghost"
+      onClick={() => setMoodManagerOpen(v => !v)}
       style={{
         padding: '3px 9px',
         fontSize: 11,

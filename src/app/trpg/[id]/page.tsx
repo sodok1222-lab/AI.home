@@ -323,6 +323,10 @@ try{new MutationObserver(function(){r(0)}).observe(document.documentElement,{chi
 // 0.4초마다 확인하고, 2초마다는 값이 같아도 다시 알린다 (숨김 상태에선 레이아웃이 0이라 스킵됨)
 setInterval(function(){n++;r(n%5===0);},400);
 r(1);})();
+
+document.addEventListener('contextmenu',function(e){e.preventDefault();},true);
+document.addEventListener('dragstart',function(e){e.preventDefault();},true);
+document.addEventListener('selectstart',function(e){e.preventDefault();},true);
 </scr${''}ipt><style>
 /* height:auto — 로그 문서가 html/body에 100%를 걸어 두면 내용과 무관하게 뷰포트만큼 커진다 */
 html,body{margin:0!important;padding:0!important;height:auto!important;min-height:0!important}

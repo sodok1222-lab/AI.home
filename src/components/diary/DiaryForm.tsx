@@ -60,6 +60,15 @@ export function DiaryForm({ initial, moods, setMoods, onSave, onCancel }: {
         </div>
         <div>
           <label className="k-label" style={{ marginBottom: 6 }}>무드</label>
+          
+<button
+  type="button"
+  className="btn btn-ghost"
+  style={{ marginLeft: 8, padding: '3px 9px', fontSize: 11 }}
+>
+  ＋ 무드 관리
+</button>
+
           <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap' }}>
             {moods.map(m => (
               <button key={m.id}

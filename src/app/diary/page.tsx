@@ -16,15 +16,48 @@ import { EditableDesc, PageTitle } from '@/components/ui/PageText';
 
 const PAGE_SIZE = 10;
 
-function MoodIcon({ mood, size = 30 }: { mood?: Mood; size?: number }) {
+function MoodIcon({
+  mood,
+  size = 30,
+  imageId,
+}: {
+  mood?: Mood;
+  size?: number;
+  imageId?: string;
+}) {
   return (
-    <span style={{
-      width: size, height: size, borderRadius: '50%', flexShrink: 0,
-      // 줄높이를 1로 눌러야 글자 상자가 아니라 글자 자체가 가운데로 온다 (v2.0 사용자 발견)
-      display: 'flex', alignItems: 'center', justifyContent: 'center', lineHeight: 1,
-      fontSize: size * 0.45,
-      background: moodTint(mood?.color ?? '#888'), color: mood?.color ?? 'var(--sub)',
-    }}>{mood?.icon ?? '·'}</span>
+    <span
+      style={{
+        width: size,
+        height: size,
+        minWidth: size,
+        minHeight: size,
+        borderRadius: '50%',
+        flexShrink: 0,
+        overflow: 'hidden',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        lineHeight: 1,
+        fontSize: size * 0.45,
+        background: moodTint(mood?.color ?? '#888'),
+        color: mood?.color ?? 'var(--sub)',
+      }}
+    >
+      {imageId ? (
+        <div
+          style={{
+            width: '100%',
+            height: '100%',
+            overflow: 'hidden',
+          }}
+        >
+          <BlobImg fileRef={imageId} ph="" />
+        </div>
+      ) : (
+        mood?.icon ?? '·'
+      )}
+    </span>
   );
 }
 
@@ -148,7 +181,7 @@ function DiaryPageInner() {
             <div key={p.id} id={p.id} className={`dy-row ${opened ? 'open' : ''}`}>
               {/* 접힘: 제목 세로 중앙 / 펼침: 위 정렬 (4.14 v1.8) */}
               <div className="hd" onClick={() => setOpen(o => (o === p.id ? null : p.id))}>
-                <MoodIcon mood={m} />
+                <MoodIcon mood={m} imageId={p.imgIds?.[0]} />
                 <b className="tt">{p.title}</b>
                 {p.visibility !== 'public' && (
                   <span className="pill" style={{ flexShrink: 0 }}>{p.visibility === 'member' ? '멤버' : '비공개'}</span>

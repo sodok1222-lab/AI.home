@@ -108,10 +108,15 @@ export default function MemoPage() {
     setMVisibility('public');
     setMOpen(true);
   };
-  const openEdit = (m: StickyMemo) => {
-    setMId(m.id); setMText(m.text); setMColor(m.color); setMSize(m.size);
-    setMOpen(true); setCtx(null);
-  };
+ const openEdit = (m: StickyMemo) => {
+  setMId(m.id);
+  setMText(m.text);
+  setMColor(m.color);
+  setMSize(m.size);
+  setMVisibility(m.visibility ?? 'public');
+  setMOpen(true);
+  setCtx(null);
+};
   const save = () => {
     if (!mText.trim()) { toast('내용을 입력해 주세요'); return; }
     if (mId) {

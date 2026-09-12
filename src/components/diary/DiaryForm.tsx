@@ -471,24 +471,84 @@ export function DiaryForm({
                       placeholder="무드 이름"
                     />
 
-                    {/* 아이콘 */}
+                    {/* 아이콘 / 사진 */}
 
-                    <KInput
-                      value={mood.icon}
-                      onChange={e =>
-                        updateMood(
-                          mood.id,
-                          {
-                            icon:
-                              e.target.value,
-                          }
-                        )
-                      }
-                      placeholder="☀️"
-                      style={{
-                        textAlign: 'center',
-                      }}
-                    />
+<div
+  style={{
+    display: 'flex',
+    alignItems: 'center',
+    gap: 5,
+  }}
+>
+  <KInput
+    value={mood.icon}
+    onChange={e =>
+      updateMood(
+        mood.id,
+        {
+          icon: e.target.value,
+          iconImage: undefined,
+        }
+      )
+    }
+    placeholder="☀️"
+    style={{
+      textAlign: 'center',
+      width: 44,
+    }}
+  />
+
+  <label
+    title="무드 사진"
+    style={{
+      width: 30,
+      height: 30,
+      border: '1px solid var(--line)',
+      borderRadius: 6,
+      display: 'grid',
+      placeItems: 'center',
+      cursor: 'pointer',
+      overflow: 'hidden',
+      flexShrink: 0,
+    }}
+  >
+    {mood.iconImage ? (
+      <BlobImg
+        fileRef={mood.iconImage}
+        ph="＋"
+        imgStyle={{
+          width: 30,
+          height: 30,
+          objectFit: 'cover',
+        }}
+      />
+    ) : (
+      <span style={{ fontSize: 12 }}>📷</span>
+    )}
+
+    <input
+      type="file"
+      accept="image/*"
+      style={{ display: 'none' }}
+      onChange={async e => {
+        const file = e.target.files?.[0];
+
+        if (!file) return;
+
+        const ref = await putBlob(file);
+
+        updateMood(
+          mood.id,
+          {
+            iconImage: ref,
+          }
+        );
+
+        e.target.value = '';
+      }}
+    />
+  </label>
+</div>
 
                     {/* 색상 */}
 

@@ -69,7 +69,20 @@ export function DiaryForm({ initial, moods, onSave, onCancel }: {
                   fontSize: 12, transition: '.15s',
                 }}
                 onClick={() => setMoodId(m.id)}>
-                <span style={{ color: m.color }}>{m.icon}</span> {m.name}
+              {m.iconImage ? (
+  <BlobImg
+    fileRef={m.iconImage}
+    ph=""
+    imgStyle={{
+      width: 24,
+      height: 24,
+      objectFit: 'cover',
+      borderRadius: '50%',
+    }}
+  />
+) : (
+  <span style={{ color: m.color }}>{m.icon}</span>
+)} {m.name}
               </button>
             ))}
           </div>

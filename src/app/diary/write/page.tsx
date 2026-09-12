@@ -14,7 +14,7 @@ export default function DiaryWritePage() {
   const { isAdmin } = useAuth();
   const toast = useToast();
   const [posts, setPosts] = useLocalList<DiaryPost>('ohome.diary.v1', DIARY_SEED);
-  const [moods] = useLocalList<Mood>('ohome.moods.v1', MOOD_SEED);
+  const [moods, setMoods] = useLocalList<Mood>('ohome.moods.v1', MOOD_SEED);
 
   if (!isAdmin) {
     return (
@@ -27,7 +27,7 @@ export default function DiaryWritePage() {
   return (
     <section className="page">
       <div className="page-head"><PageTitle>WRITE DIARY</PageTitle><EditableDesc k="diary-write-desc" def="일기 쓰기" /></div>
-      <DiaryForm initial={null} moods={moods}
+      <DiaryForm initial={null} moods={moods} setMoods={setMoods}
         onCancel={() => router.push('/diary')}
         onSave={v => {
           const p: DiaryPost = { id: newId(), ...v };

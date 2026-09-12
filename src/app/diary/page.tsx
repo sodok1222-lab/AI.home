@@ -42,7 +42,12 @@ function MoodIcon({
         color: mood?.color ?? 'var(--sub)',
       }}
     >
-      {mood?.icon ?? '·'}
+      id="xq7k2m"
+{mood?.iconImage ? (
+  <BlobImg fileRef={mood.iconImage} ph="" />
+) : (
+  mood?.icon ?? '·'
+)}
     </span>
   );
 }

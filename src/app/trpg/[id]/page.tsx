@@ -145,7 +145,7 @@ const baseAllowed = !!l && (
         originalFileId: await putBlob(eFile), originalName: eFile.name,
       };
     } else if (bodyMode === 'text' && eText.trim()) {
-      bodyPatch = await saveLogBody(eText);
+      bodyPatch = await saveLogBody(eText.trimStart());
     }
     // 썸네일 교체 준비
     let thumbPatch: Partial<TrpgLog> = {};

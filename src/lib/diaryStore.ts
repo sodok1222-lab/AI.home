@@ -7,6 +7,7 @@ export interface Mood {
   name: string;
   icon: string;      // 이모지/특수문자 1~2자
   color: string;     // 아이콘 색 (배경은 자동 틴트)
+  iconImage?: string; // 동그란 아이콘용 이미지
 }
 
 /** 무드는 처음부터 비어 있다 (v2.0) — 예시 4종은 프로토타입 잔재라 환경설정에서 직접 만든다 */

@@ -101,6 +101,7 @@ export default function MemoPage() {
   const [mText, setMText] = useState('');
   const [mColor, setMColor] = useState(MEMO_COLORS[0]);
   const [mSize, setMSize] = useState<StickyMemo['size']>('m');
+  const [mVisibility, setMVisibility] = useState<'public' | 'member' | 'private'>('public');
   const openNew = () => {
     setMId(null); setMText('');
     setMColor(MEMO_COLORS[memos.length % MEMO_COLORS.length]); setMSize('m');

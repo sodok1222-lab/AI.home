@@ -66,7 +66,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       (function () {
         function isMemoArea(target) {
           if (!target || !target.closest) return false;
-          return !!target.closest('.postit, .memo-list-item, .ctx-menu');
+          return !!target.closest('.postit, .memo-list-item, .ctx-menu, .trpg-log-editor');
         }
 
         document.addEventListener(
@@ -96,7 +96,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
             if (
               target.closest(
-                'input, textarea, [contenteditable="true"], .postit, .memo-list-item, .ctx-menu'
+               'input, textarea, [contenteditable="true"], .postit, .memo-list-item, .ctx-menu, .trpg-log-editor'
               )
             ) {
               return;

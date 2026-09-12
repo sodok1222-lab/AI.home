@@ -1,15 +1,30 @@
 ```tsx
 'use client';
-// 일기 작성/수정 공용 폼 (4.14) — 제목 · 날짜 · 무드 · 내용(MD) · 이미지 · 공개범위
+
+// 일기 작성/수정 공용 폼 (4.14)
+// 제목 · 날짜 · 무드 · 내용(MD) · 이미지 · 공개범위
+
 import React, { useState } from 'react';
-import { DiaryPost, Mood, moodTint } from '@/lib/diaryStore';
+import {
+  DiaryPost,
+  Mood,
+  moodTint,
+} from '@/lib/diaryStore';
 import { Visibility } from '@/lib/charStore';
 import { newId } from '@/lib/postStore';
-import { KInput, KTextarea, KSelect, KDate } from '@/components/ui/Kit';
+import {
+  KInput,
+  KTextarea,
+  KSelect,
+  KDate,
+} from '@/components/ui/Kit';
 import { DragList } from '@/components/ui/DragList';
 import { useConfirmDelete } from '@/components/ui/Modal';
-import { putBlob, useBlobUrl } from '@/lib/blobStore';
-import { BlobImg } from '@/lib/blobStore';
+import {
+  putBlob,
+  useBlobUrl,
+  BlobImg,
+} from '@/lib/blobStore';
 import { useToast } from '@/components/ui/Toast';
 
 export interface DiaryFormValue {
@@ -61,32 +76,46 @@ export function DiaryForm({
   onCancel: () => void;
 }) {
   const toast = useToast();
+  const del = useConfirmDelete();
+
   const isNew = !initial;
 
-const today = new Date();
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, '0');
+  const day = String(today.getDate()).padStart(2, '0');
+  const todayStr = [year, month, day].join('-');
 
-const year = today.getFullYear();
-const month = String(today.getMonth() + 1).padStart(2, '0');
-const day = String(today.getDate()).padStart(2, '0');
+  const [title, setTitle] = useState(
+    initial?.title ?? ''
+  );
 
-const todayStr = [year, month, day].join('-');
+  const [date, setDate] = useState(
+    initial?.date ?? todayStr
+  );
 
-  const [title, setTitle] = useState(initial?.title ?? '');
-  const [date, setDate] = useState(initial?.date ?? todayStr);
-  const [moodId, setMoodId] = useState(initial?.moodId ?? moods[0]?.id ?? '');
-  const [moodManagerOpen, setMoodManagerOpen] = useState(false);
-  const [body, setBody] = useState(initial?.body ?? '');
+  const [moodId, setMoodId] = useState(
+    initial?.moodId ?? moods[0]?.id ?? ''
+  );
+
+  const [moodManagerOpen, setMoodManagerOpen] =
+    useState(false);
+
+  const [body, setBody] = useState(
+    initial?.body ?? ''
+  );
+
   const [imgs, setImgs] = useState<ImgItem[]>(() =>
-    (initial?.imgIds ?? []).map(r => ({
+    (initial?.imgIds ?? []).map(ref => ({
       id: newId(),
-      ref: r,
+      ref,
     }))
   );
-  const [visibility, setVisibility] = useState<Visibility>(
-    initial?.visibility ?? 'public'
-  );
 
-  const del = useConfirmDelete();
+  const [visibility, setVisibility] =
+    useState<Visibility>(
+      initial?.visibility ?? 'public'
+    );
 
   const save = async () => {
     if (!title.trim()) {
@@ -95,13 +124,17 @@ const todayStr = [year, month, day].join('-');
     }
 
     if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
-      toast('날짜를 YYYY-MM-DD 형식으로 입력해 주세요');
+      toast(
+        '날짜를 YYYY-MM-DD 형식으로 입력해 주세요'
+      );
       return;
     }
 
     const imgIds = await Promise.all(
-      imgs.map(i =>
-        i.file ? putBlob(i.file) : Promise.resolve(i.ref!)
+      imgs.map(item =>
+        item.file
+          ? putBlob(item.file)
+          : Promise.resolve(item.ref!)
       )
     );
 
@@ -122,10 +155,10 @@ const todayStr = [year, month, day].join('-');
     patch: Partial<Mood>
   ) => {
     setMoods(
-      moods.map(m =>
-        m.id === id
-          ? { ...m, ...patch }
-          : m
+      moods.map(mood =>
+        mood.id === id
+          ? { ...mood, ...patch }
+          : mood
       )
     );
   };
@@ -151,7 +184,10 @@ const todayStr = [year, month, day].join('-');
     del.ask(
       '이 무드를 삭제하시겠습니까?',
       () => {
-        const next = moods.filter(m => m.id !== id);
+        const next = moods.filter(
+          mood => mood.id !== id
+        );
+
         setMoods(next);
 
         if (moodId === id) {
@@ -163,6 +199,8 @@ const todayStr = [year, month, day].join('-');
 
   return (
     <div className="write-grid">
+      {/* ---------- 왼쪽: 작성 영역 ---------- */}
+
       <div
         className="panel"
         style={{
@@ -172,11 +210,20 @@ const todayStr = [year, month, day].join('-');
           alignContent: 'start',
         }}
       >
-        <div style={{ display: 'flex', gap: 8 }}>
+        {/* 제목 / 날짜 */}
+
+        <div
+          style={{
+            display: 'flex',
+            gap: 8,
+          }}
+        >
           <KInput
             placeholder="제목"
             value={title}
-            onChange={e => setTitle(e.target.value)}
+            onChange={e =>
+              setTitle(e.target.value)
+            }
             style={{ flex: 1 }}
           />
 
@@ -188,6 +235,7 @@ const todayStr = [year, month, day].join('-');
         </div>
 
         {/* ---------- 무드 ---------- */}
+
         <div>
           <div
             style={{
@@ -208,7 +256,9 @@ const todayStr = [year, month, day].join('-');
               type="button"
               className="btn btn-ghost"
               onClick={() =>
-                setMoodManagerOpen(v => !v)
+                setMoodManagerOpen(
+                  value => !value
+                )
               }
               style={{
                 padding: '3px 9px',
@@ -222,6 +272,7 @@ const todayStr = [year, month, day].join('-');
           </div>
 
           {/* 무드 선택 */}
+
           <div
             style={{
               display: 'flex',
@@ -229,9 +280,9 @@ const todayStr = [year, month, day].join('-');
               flexWrap: 'wrap',
             }}
           >
-            {moods.map(m => (
+            {moods.map(mood => (
               <button
-                key={m.id}
+                key={mood.id}
                 type="button"
                 className="mood-pick"
                 style={{
@@ -241,22 +292,24 @@ const todayStr = [year, month, day].join('-');
                   padding: '6px 13px',
                   borderRadius: 999,
                   border:
-  '1.5px solid ' +
-  (moodId === m.id
-    ? m.color
-    : 'var(--line)'),
+                    '1.5px solid ' +
+                    (moodId === mood.id
+                      ? mood.color
+                      : 'var(--line)'),
                   background:
-                    moodId === m.id
-                      ? moodTint(m.color)
+                    moodId === mood.id
+                      ? moodTint(mood.color)
                       : 'transparent',
                   fontSize: 12,
                   transition: '.15s',
                 }}
-                onClick={() => setMoodId(m.id)}
+                onClick={() =>
+                  setMoodId(mood.id)
+                }
               >
-                {m.iconImage ? (
+                {mood.iconImage ? (
                   <BlobImg
-                    fileRef={m.iconImage}
+                    fileRef={mood.iconImage}
                     ph=""
                     imgStyle={{
                       width: 24,
@@ -266,25 +319,32 @@ const todayStr = [year, month, day].join('-');
                     }}
                   />
                 ) : (
-                  <span style={{ color: m.color }}>
-                    {m.icon}
+                  <span
+                    style={{
+                      color: mood.color,
+                    }}
+                  >
+                    {mood.icon}
                   </span>
                 )}
 
-                {m.name}
+                {mood.name}
               </button>
             ))}
           </div>
 
           {/* ---------- 무드 관리 패널 ---------- */}
+
           {moodManagerOpen && (
             <div
               style={{
                 marginTop: 12,
                 padding: 14,
-                border: '1px solid var(--line)',
+                border:
+                  '1px solid var(--line)',
                 borderRadius: 10,
-                background: 'var(--panel, transparent)',
+                background:
+                  'var(--panel, transparent)',
                 display: 'grid',
                 gap: 10,
               }}
@@ -293,7 +353,8 @@ const todayStr = [year, month, day].join('-');
                 style={{
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'space-between',
+                  justifyContent:
+                    'space-between',
                   gap: 10,
                 }}
               >
@@ -311,10 +372,12 @@ const todayStr = [year, month, day].join('-');
                     style={{
                       marginTop: 3,
                       fontSize: 10,
-                      color: 'var(--muted)',
+                      color:
+                        'var(--muted)',
                     }}
                   >
-                    이름, 아이콘, 색상을 자유롭게 바꿀 수 있어요.
+                    이름, 아이콘, 색상을
+                    자유롭게 바꿀 수 있어요.
                   </div>
                 </div>
 
@@ -331,15 +394,17 @@ const todayStr = [year, month, day].join('-');
                 </button>
               </div>
 
+              {/* 무드 목록 */}
+
               <div
                 style={{
                   display: 'grid',
                   gap: 8,
                 }}
               >
-                {moods.map(m => (
+                {moods.map(mood => (
                   <div
-                    key={m.id}
+                    key={mood.id}
                     style={{
                       display: 'grid',
                       gridTemplateColumns:
@@ -349,6 +414,7 @@ const todayStr = [year, month, day].join('-');
                     }}
                   >
                     {/* 아이콘 미리보기 */}
+
                     <div
                       style={{
                         width: 32,
@@ -356,47 +422,68 @@ const todayStr = [year, month, day].join('-');
                         borderRadius: '50%',
                         display: 'grid',
                         placeItems: 'center',
-                        background: moodTint(m.color),
+                        background:
+                          moodTint(
+                            mood.color
+                          ),
                         overflow: 'hidden',
                         fontSize: 17,
                       }}
                     >
-                      {m.iconImage ? (
+                      {mood.iconImage ? (
                         <BlobImg
-                          fileRef={m.iconImage}
+                          fileRef={
+                            mood.iconImage
+                          }
                           ph=""
                           imgStyle={{
                             width: 32,
                             height: 32,
                             objectFit: 'cover',
-                            borderRadius: '50%',
+                            borderRadius:
+                              '50%',
                           }}
                         />
                       ) : (
-                        <span style={{ color: m.color }}>
-                          {m.icon}
+                        <span
+                          style={{
+                            color:
+                              mood.color,
+                          }}
+                        >
+                          {mood.icon}
                         </span>
                       )}
                     </div>
 
                     {/* 이름 */}
+
                     <KInput
-                      value={m.name}
+                      value={mood.name}
                       onChange={e =>
-                        updateMood(m.id, {
-                          name: e.target.value,
-                        })
+                        updateMood(
+                          mood.id,
+                          {
+                            name:
+                              e.target.value,
+                          }
+                        )
                       }
                       placeholder="무드 이름"
                     />
 
                     {/* 아이콘 */}
+
                     <KInput
-                      value={m.icon}
+                      value={mood.icon}
                       onChange={e =>
-                        updateMood(m.id, {
-                          icon: e.target.value,
-                        })
+                        updateMood(
+                          mood.id,
+                          {
+                            icon:
+                              e.target.value,
+                          }
+                        )
                       }
                       placeholder="☀️"
                       style={{
@@ -405,13 +492,18 @@ const todayStr = [year, month, day].join('-');
                     />
 
                     {/* 색상 */}
+
                     <input
                       type="color"
-                      value={m.color}
+                      value={mood.color}
                       onChange={e =>
-                        updateMood(m.id, {
-                          color: e.target.value,
-                        })
+                        updateMood(
+                          mood.id,
+                          {
+                            color:
+                              e.target.value,
+                          }
+                        )
                       }
                       title="무드 색상"
                       style={{
@@ -428,11 +520,12 @@ const todayStr = [year, month, day].join('-');
                     />
 
                     {/* 삭제 */}
+
                     <button
                       type="button"
                       className="fx"
                       onClick={() =>
-                        removeMood(m.id)
+                        removeMood(mood.id)
                       }
                       title="무드 삭제"
                       style={{
@@ -452,6 +545,7 @@ const todayStr = [year, month, day].join('-');
         </div>
 
         {/* ---------- 본문 ---------- */}
+
         <div>
           <label
             className="k-label"
@@ -462,25 +556,29 @@ const todayStr = [year, month, day].join('-');
 
           <KTextarea
             value={body}
-            onChange={e => setBody(e.target.value)}
+            onChange={e =>
+              setBody(e.target.value)
+            }
             style={{ minHeight: 180 }}
           />
         </div>
 
         {/* ---------- 이미지 ---------- */}
+
         <label
           className="k-label"
           style={{ margin: 0 }}
         >
-          이미지 (선택) — 본문 아래에 순서대로 표시 · ⠿ 순서
+          이미지 (선택) — 본문 아래에 순서대로
+          표시 · ⠿ 순서
         </label>
 
         {imgs.length > 0 && (
           <DragList
             items={imgs}
-            keyOf={i => i.id}
+            keyOf={item => item.id}
             onReorder={setImgs}
-            render={i => (
+            render={item => (
               <div
                 style={{
                   display: 'flex',
@@ -494,7 +592,7 @@ const todayStr = [year, month, day].join('-');
                   ⠿
                 </span>
 
-                <ImgThumb item={i} />
+                <ImgThumb item={item} />
 
                 <span
                   className="fx"
@@ -505,9 +603,11 @@ const todayStr = [year, month, day].join('-');
                     del.ask(
                       '이 이미지를 빼시겠습니까?',
                       () =>
-                        setImgs(l =>
-                          l.filter(
-                            x => x.id !== i.id
+                        setImgs(current =>
+                          current.filter(
+                            image =>
+                              image.id !==
+                              item.id
                           )
                         )
                     )
@@ -530,13 +630,17 @@ const todayStr = [year, month, day].join('-');
             const list = e.target.files;
 
             if (list) {
-              setImgs(prev => [
-                ...prev,
-                ...Array.from(list).map(f => ({
-                  id: newId(),
-                  url: URL.createObjectURL(f),
-                  file: f,
-                })),
+              setImgs(previous => [
+                ...previous,
+                ...Array.from(list).map(
+                  file => ({
+                    id: newId(),
+                    url: URL.createObjectURL(
+                      file
+                    ),
+                    file,
+                  })
+                ),
               ]);
             }
 
@@ -562,7 +666,8 @@ const todayStr = [year, month, day].join('-');
         </button>
       </div>
 
-      {/* ---------- 공개범위 ---------- */}
+      {/* ---------- 오른쪽: 공개범위 ---------- */}
+
       <div>
         <div
           className="panel widget"
@@ -572,8 +677,10 @@ const todayStr = [year, month, day].join('-');
 
           <KSelect
             value={visibility}
-            onChange={v =>
-              setVisibility(v as Visibility)
+            onChange={value =>
+              setVisibility(
+                value as Visibility
+              )
             }
             options={[
               {

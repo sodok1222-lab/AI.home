@@ -235,6 +235,31 @@ export default function MemoPage() {
             <button className={mSize === 's' ? 'on' : ''} onClick={() => setMSize('s')}>작게</button>
             <button className={mSize === 'm' ? 'on' : ''} onClick={() => setMSize('m')}>보통</button>
             <button className={mSize === 'l' ? 'on' : ''} onClick={() => setMSize('l')}>크게</button>
+            <div>
+  <div style={{ fontSize: 11, color: 'var(--faint)', marginBottom: 6 }}>
+    공개범위
+  </div>
+  <div className="mini-seg" style={{ justifySelf: 'start' }}>
+    <button
+      className={mVisibility === 'public' ? 'on' : ''}
+      onClick={() => setMVisibility('public')}
+    >
+      전체공개
+    </button>
+    <button
+      className={mVisibility === 'member' ? 'on' : ''}
+      onClick={() => setMVisibility('member')}
+    >
+      멤버공개
+    </button>
+    <button
+      className={mVisibility === 'private' ? 'on' : ''}
+      onClick={() => setMVisibility('private')}
+    >
+      나만보기
+    </button>
+  </div>
+</div>
           </div>
         </div>
       </Modal>

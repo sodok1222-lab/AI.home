@@ -188,7 +188,15 @@ export default function MemoPage() {
         {/* 우측 메모 리스트 (v1.8) — 클릭 시 보드의 메모가 맨 위로 + 하이라이트 */}
         <div className="panel" style={{ padding: 12 }}>
           <h4 style={{ fontSize: 11, letterSpacing: '.14em', color: 'var(--faint)', padding: '4px 6px 10px' }}>MEMO LIST</h4>
-          {sorted.map(m => (
+          {sorted.filter(m => {
+  const visibility = m.visibility ?? 'public';
+
+  if (visibility === 'public') return true;
+  if (visibility === 'member') return !!user;
+  if (visibility === 'private') return isAdmin;
+
+  return true;
+}).map(m => (
             <div key={m.id} className="memo-list-item" onClick={() => focus(m.id)}
               onContextMenu={e => onCtx(e, m, true)}>
               <span className="cdot" style={{ background: m.color }} />

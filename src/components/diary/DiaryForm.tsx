@@ -487,7 +487,6 @@ export function DiaryForm({
         mood.id,
         {
           icon: e.target.value,
-          iconImage: undefined,
         }
       )
     }

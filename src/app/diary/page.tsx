@@ -19,11 +19,9 @@ const PAGE_SIZE = 10;
 function MoodIcon({
   mood,
   size = 30,
-  imageId,
 }: {
   mood?: Mood;
   size?: number;
-  imageId?: string;
 }) {
   return (
     <span
@@ -44,19 +42,7 @@ function MoodIcon({
         color: mood?.color ?? 'var(--sub)',
       }}
     >
-      {imageId ? (
-        <div
-          style={{
-            width: '100%',
-            height: '100%',
-            overflow: 'hidden',
-          }}
-        >
-          <BlobImg fileRef={imageId} ph="" />
-        </div>
-      ) : (
-        mood?.icon ?? '·'
-      )}
+      {mood?.icon ?? '·'}
     </span>
   );
 }
@@ -181,7 +167,7 @@ function DiaryPageInner() {
             <div key={p.id} id={p.id} className={`dy-row ${opened ? 'open' : ''}`}>
               {/* 접힘: 제목 세로 중앙 / 펼침: 위 정렬 (4.14 v1.8) */}
               <div className="hd" onClick={() => setOpen(o => (o === p.id ? null : p.id))}>
-                <MoodIcon mood={m} imageId={p.imgIds?.[0]} />
+                <MoodIcon mood={m} />
                 <b className="tt">{p.title}</b>
                 {p.visibility !== 'public' && (
                   <span className="pill" style={{ flexShrink: 0 }}>{p.visibility === 'member' ? '멤버' : '비공개'}</span>

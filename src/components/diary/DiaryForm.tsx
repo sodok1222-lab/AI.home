@@ -28,7 +28,7 @@ function ImgThumb({ item }: { item: ImgItem }) {
 export function DiaryForm({ initial, moods, setMoods, onSave, onCancel }: {
   initial: DiaryPost | null;
   moods: Mood[];
-  setMoods: React.Dispatch<React.SetStateAction<Mood[]>>;
+  setMoods: (next: Mood[]) => void;
   onSave: (v: DiaryFormValue) => void;
   onCancel: () => void;
 }) {

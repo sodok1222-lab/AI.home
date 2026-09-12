@@ -63,8 +63,9 @@ export function DiaryForm({
   const toast = useToast();
   const isNew = !initial;
 
-  const today = new Date();
-  const todayStr = `${today.getFullYear()}-${String(
+const today = new Date();
+
+const todayStr = `${today.getFullYear()}-${String(
   today.getMonth() + 1
 ).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
 

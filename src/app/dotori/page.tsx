@@ -20,11 +20,23 @@ type Tab = 'all' | DotoriStatus;
 
 function DotoriPageInner() {
   const router = useRouter();
-  const { isAdmin } = useAuth();
+  const { isAdmin, user } = useAuth();
   const [itemsAll, setItemsAll, loaded] = useLocalList<DotoriItem>('ohome.dotori.v1', DOTORI_SEED);
   // 여러 개로 만든 섹션 (v2.0) — 주소의 ?s= 가 가리키는 것만 보여 준다
   const sec = useSectionParam('dotori');
-  const items = filterSection(itemsAll, sec.id);
+const sectionItems = filterSection(itemsAll, sec.id);
+
+const items = sectionItems.filter(it => {
+  const visibility = it.visibility ?? 'public';
+
+  if (visibility === 'public') return true;
+  if (visibility === 'member') return !!user;
+  if (visibility === 'private') {
+    return isAdmin || it.authorId === user?.id;
+  }
+
+  return true;
+});
   // 저장은 이 섹션 자리만 교체 — 걸러진 목록을 그대로 넘겨도 다른 섹션이 지워지지 않는다
   const setItems = sectionSetter(itemsAll, sec.id, setItemsAll);
   const [tab, setTab] = useState<Tab>('all');

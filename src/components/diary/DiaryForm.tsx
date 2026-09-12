@@ -39,6 +39,7 @@ export function DiaryForm({ initial, moods, setMoods, onSave, onCancel }: {
   const [title, setTitle] = useState(initial?.title ?? '');
   const [date, setDate] = useState(initial?.date ?? todayStr);
   const [moodId, setMoodId] = useState(initial?.moodId ?? moods[0]?.id ?? '');
+  const [moodManagerOpen, setMoodManagerOpen] = useState(false);
   const [body, setBody] = useState(initial?.body ?? '');
   const [imgs, setImgs] = useState<ImgItem[]>(() => (initial?.imgIds ?? []).map(r => ({ id: newId(), ref: r })));
   const [visibility, setVisibility] = useState<Visibility>(initial?.visibility ?? 'public');

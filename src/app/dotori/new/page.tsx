@@ -35,8 +35,13 @@ function DotoriNewPageInner() {
         onCancel={() => router.push('/dotori' + secQuery('dotori', sec.id))}
         onSave={v => {
           const it: DotoriItem = {
-            id: newId(), ...v, link: v.link, ph: 'cool', date: new Date().toISOString(),
-          };
+  id: newId(),
+  ...v,
+  authorId: user?.id,
+  link: v.link,
+  ph: 'cool',
+  date: new Date().toISOString(),
+};
           setItems([{ ...it, ...secStamp(sec.id) }, ...items]);
           toast('도토리가 등록되었습니다');
           router.push('/dotori' + secQuery('dotori', sec.id));

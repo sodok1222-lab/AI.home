@@ -8,6 +8,7 @@ export interface StickyMemo {
   text: string;
   author: string;            // 작성 당시 닉네임
   authorId: string;
+  visibility?: 'public' | 'member' | 'private';
   color: string;             // 포스트잇 배경 hex
   x: number; y: number;      // 보드 기준 % (0~100) — 배치는 저장되어 모두에게 동일
   rot: number;               // 기울기 deg

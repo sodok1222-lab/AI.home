@@ -240,11 +240,11 @@ const todayStr = [year, month, day].join('-');
                   gap: 7,
                   padding: '6px 13px',
                   borderRadius: 999,
-                  border: `1.5px solid ${
-                    moodId === m.id
-                      ? m.color
-                      : 'var(--line)'
-                  }`,
+                  border:
+  '1.5px solid ' +
+  (moodId === m.id
+    ? m.color
+    : 'var(--line)'),
                   background:
                     moodId === m.id
                       ? moodTint(m.color)

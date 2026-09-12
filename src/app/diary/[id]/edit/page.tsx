@@ -18,7 +18,7 @@ export default function DiaryEditPage() {
   const [posts, setPosts, loaded] = useLocalList<DiaryPost>('ohome.diary.v1', DIARY_SEED);
   // 큰 글씨 — 추가 섹션 항목이면 그 이름, 눌렀을 때도 그 목록으로 (v2.0 사용자 제보)
   const tt = useSectionTitle('diary', posts.find(x => x.id === id)?.secId, 'EDIT DIARY');
-  const [moods] = useLocalList<Mood>('ohome.moods.v1', MOOD_SEED);
+  const [moods, setMoods] = useLocalList<Mood>('ohome.moods.v1', MOOD_SEED);
   const p = posts.find(x => x.id === id);
 
   if (!loaded) return <section className="page" />;

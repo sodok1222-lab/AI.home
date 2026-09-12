@@ -219,6 +219,7 @@ export interface DotoriItem {
   tags: string[];            // 태그 (복수)
   link?: string;             // 판매처/소개 페이지
   status: DotoriStatus;      // 카드에서 바로 전환
+  visibility?: 'public' | 'member' | 'private';
   imgId?: string;            // 16:9 이미지 (IndexedDB)
   thumbCrop?: CropValue;
   ph: string;                // 이미지 없을 때 플레이스홀더

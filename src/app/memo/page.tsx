@@ -105,6 +105,7 @@ export default function MemoPage() {
   const openNew = () => {
     setMId(null); setMText('');
     setMColor(MEMO_COLORS[memos.length % MEMO_COLORS.length]); setMSize('m');
+    setMVisibility('public');
     setMOpen(true);
   };
   const openEdit = (m: StickyMemo) => {

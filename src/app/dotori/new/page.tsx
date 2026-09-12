@@ -16,7 +16,7 @@ function DotoriNewPageInner() {
   // 큰 글씨 — 추가 섹션이면 그 이름, 눌렀을 때도 그 목록으로 (v2.0 사용자 제보)
   const tt = useSectionTitle('dotori', sec.id, 'ADD DOTORI');
   const router = useRouter();
-  const { isAdmin } = useAuth();
+  const { isAdmin, user } = useAuth();
   const toast = useToast();
   const [items, setItems] = useLocalList<DotoriItem>('ohome.dotori.v1', DOTORI_SEED);
 

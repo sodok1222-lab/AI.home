@@ -64,9 +64,9 @@ export function DiaryForm({
   const isNew = !initial;
 
   const today = new Date();
-const todayStr = `${today.getFullYear()}-${String(
-  today.getMonth() + 1
-).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+  const todayStr = `${today.getFullYear()}-${String(
+    today.getMonth() + 1
+  ).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
 
   const [title, setTitle] = useState(initial?.title ?? '');
   const [date, setDate] = useState(initial?.date ?? todayStr);

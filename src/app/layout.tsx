@@ -59,6 +59,58 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script dangerouslySetInnerHTML={{
           __html: `(function(){try{var m=JSON.parse(localStorage.getItem('ohome.themeCss.v1'));if(m){var s=document.documentElement.style;for(var k in m)s.setProperty(k,m[k]);}}catch(e){}})();`,
         }} />
+
+        <script
+  dangerouslySetInnerHTML={{
+    __html: `
+      (function () {
+        function isMemoArea(target) {
+          if (!target || !target.closest) return false;
+          return !!target.closest('.postit, .memo-list-item, .ctx-menu');
+        }
+
+        document.addEventListener(
+          'contextmenu',
+          function (e) {
+            if (isMemoArea(e.target)) return;
+            e.preventDefault();
+          },
+          true
+        );
+
+        document.addEventListener(
+          'dragstart',
+          function (e) {
+            if (isMemoArea(e.target)) return;
+            e.preventDefault();
+          },
+          true
+        );
+
+        document.addEventListener(
+          'selectstart',
+          function (e) {
+            var target = e.target;
+
+            if (!target || !target.closest) return;
+
+            if (
+              target.closest(
+                'input, textarea, [contenteditable="true"], .postit, .memo-list-item, .ctx-menu'
+              )
+            ) {
+              return;
+            }
+
+            e.preventDefault();
+          },
+          true
+        );
+      })();
+    `,
+  }}
+/>
+        
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Noto+Serif+KR:wght@500;700&display=swap"

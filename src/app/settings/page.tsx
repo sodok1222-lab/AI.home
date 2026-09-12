@@ -3453,8 +3453,6 @@ function SettingsInner() {
             <ThreadPane />
           ) : tab === '메모장' ? (
             <MemoPane />
-          ) : tab === '무드 리스트' ? (
-            <MoodPane />
           ) : tab === 'BGM' ? (
             <BgmPane />
           ) : tab === '폰트' ? (

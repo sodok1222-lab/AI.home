@@ -53,6 +53,9 @@ export interface ThemeVars {
   // 입력 포커스 (v1.9 사용자 요청) — 인풋·텍스트에리어·드롭다운·에디터 공통
   // focusColor: 테두리·링 색 / focusRing: 링 방식(은은한 글로우 · 선명한 라인 · 없음) / focusW: 링 두께 px
   focusColor?: string; focusRing?: 'glow' | 'line' | 'none'; focusW?: number;
+  // 갤러리 이전/다음 화살표 아이콘 색
+ galleryArrow?: string;
+   
   // 포인트 컬러
   accent: string; accentSoft: string;
   // 모서리 둥글기(px)
@@ -86,6 +89,7 @@ export const DARK_THEME: ThemeVars = {
   memoBoard: '#2a2f37', memoBoardBd: '#3a404b',
   tabBg: '#3a4049', tabFg: '#aab0ba', tabOnBg: '#fbfbfc', tabOnFg: '#1d2025',
   cropBg: '#2c313a',
+  galleryArrow: '#8c98c4',
   accent: '#a63a45', accentSoft: '#c96a73',
   radius: 14, radiusS: 9, shadow: 100, ddShadow: 100,
 };
@@ -244,6 +248,7 @@ export function themeToCssVars(t: ThemeVars): Record<string, string> {
     '--search-bg': t.searchBg ?? '#232830', '--search-fg': t.searchFg ?? '#e8eaee',
     '--search-ic': t.searchIc ?? '#8b919b', '--search-bd': t.searchBd ?? '#3a404a',
     '--accent': t.accent, '--accent-soft': t.accentSoft,
+    '--gallery-arrow': t.galleryArrow ?? '#8c98c4',
     // 진한 버튼 3색 — 호버 미지정 시 배경에서 살짝 밝게 자동 파생
     '--btn-dark': t.btnDark ?? '#1d2025',
     '--btn-dark-fg': t.btnDarkFg ?? '#ffffff',

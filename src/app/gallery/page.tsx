@@ -88,7 +88,11 @@ function BackupPageInner() {
             const i = start + si;   // 정렬은 전체 기준 위치로
             const folded = p.fold && !unveiled[p.id];
             return (
-              <div key={p.id} className="panel g-item" {...sort(i)}
+              <div
+  key={p.id}
+  className="panel g-item"
+  data-card-sort={editOn && isAdmin ? 'true' : undefined}
+  {...sort(i)}
                 onClick={() => { if (!folded && !editOn) router.push(`/gallery/${p.id}`); }}>
                 <div className={`thumb ${folded ? 'veil' : ''}`}>
                   <div style={{ position: 'absolute', inset: 0 }}>

@@ -482,38 +482,232 @@ export function DiaryForm({
     width: 82,
   }}
 >
-  {['❤️', '⭐', '🌸', '☀️', '🌙'].map(icon => (
-    <button
-      key={icon}
-      type="button"
-      title={`이모지 ${icon}`}
-      onClick={() =>
-        updateMood(
-          mood.id,
-          {
-            icon: icon,
-          }
-        )
-      }
-      style={{
-        width: 24,
-        height: 24,
-        padding: 0,
-        border: mood.icon === icon
-          ? '2px solid var(--text)'
-          : '1px solid var(--line)',
-        borderRadius: 5,
-        background: 'var(--bg)',
-        cursor: 'pointer',
-        display: 'grid',
-        placeItems: 'center',
-        fontSize: 14,
-        lineHeight: 1,
-      }}
-    >
-      {icon}
-    </button>
-  ))}
+  <details
+  style={{
+    position: 'relative',
+  }}
+>
+  <summary
+    title="이모지 선택"
+    style={{
+      width: 30,
+      height: 30,
+      border: '1px solid var(--line)',
+      borderRadius: 6,
+      display: 'grid',
+      placeItems: 'center',
+      cursor: 'pointer',
+      listStyle: 'none',
+      fontSize: 18,
+      background: 'var(--bg)',
+    }}
+  >
+    {mood.icon}
+  </summary>
+
+  <div
+    style={{
+      position: 'absolute',
+      top: 36,
+      left: 0,
+      zIndex: 100,
+      width: 280,
+      padding: 12,
+      background: 'var(--bg)',
+      border: '1px solid var(--line)',
+      borderRadius: 10,
+      boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
+    }}
+  >
+    {/* 하트 */}
+    <div style={{ marginBottom: 10 }}>
+      <div
+        style={{
+          fontSize: 12,
+          fontWeight: 700,
+          marginBottom: 6,
+        }}
+      >
+        하트
+      </div>
+
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(7, 1fr)',
+          gap: 5,
+        }}
+      >
+        {['❤️', '🩷', '🧡', '💛', '💚', '💙', '💜'].map(icon => (
+          <button
+            key={icon}
+            type="button"
+            onClick={() =>
+              updateMood(mood.id, {
+                icon,
+              })
+            }
+            style={{
+              width: 30,
+              height: 30,
+              padding: 0,
+              border: mood.icon === icon
+                ? '2px solid var(--text)'
+                : '1px solid var(--line)',
+              borderRadius: 6,
+              background: 'var(--bg)',
+              cursor: 'pointer',
+              fontSize: 17,
+            }}
+          >
+            {icon}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    {/* 별 */}
+    <div style={{ marginBottom: 10 }}>
+      <div
+        style={{
+          fontSize: 12,
+          fontWeight: 700,
+          marginBottom: 6,
+        }}
+      >
+        별
+      </div>
+
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(6, 1fr)',
+          gap: 5,
+        }}
+      >
+        {['⭐', '🌟', '✨', '💫', '🌠', '✦'].map(icon => (
+          <button
+            key={icon}
+            type="button"
+            onClick={() =>
+              updateMood(mood.id, {
+                icon,
+              })
+            }
+            style={{
+              width: 30,
+              height: 30,
+              padding: 0,
+              border: mood.icon === icon
+                ? '2px solid var(--text)'
+                : '1px solid var(--line)',
+              borderRadius: 6,
+              background: 'var(--bg)',
+              cursor: 'pointer',
+              fontSize: 17,
+            }}
+          >
+            {icon}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    {/* 꽃 */}
+    <div style={{ marginBottom: 10 }}>
+      <div
+        style={{
+          fontSize: 12,
+          fontWeight: 700,
+          marginBottom: 6,
+        }}
+      >
+        꽃
+      </div>
+
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(6, 1fr)',
+          gap: 5,
+        }}
+      >
+        {['🌸', '🌷', '🌹', '🌺', '🌻', '🪻'].map(icon => (
+          <button
+            key={icon}
+            type="button"
+            onClick={() =>
+              updateMood(mood.id, {
+                icon,
+              })
+            }
+            style={{
+              width: 30,
+              height: 30,
+              padding: 0,
+              border: mood.icon === icon
+                ? '2px solid var(--text)'
+                : '1px solid var(--line)',
+              borderRadius: 6,
+              background: 'var(--bg)',
+              cursor: 'pointer',
+              fontSize: 17,
+            }}
+          >
+            {icon}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    {/* 표정 */}
+    <div>
+      <div
+        style={{
+          fontSize: 12,
+          fontWeight: 700,
+          marginBottom: 6,
+        }}
+      >
+        표정
+      </div>
+
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(6, 1fr)',
+          gap: 5,
+        }}
+      >
+        {['😀', '😄', '😊', '😍', '🥰', '😎'].map(icon => (
+          <button
+            key={icon}
+            type="button"
+            onClick={() =>
+              updateMood(mood.id, {
+                icon,
+              })
+            }
+            style={{
+              width: 30,
+              height: 30,
+              padding: 0,
+              border: mood.icon === icon
+                ? '2px solid var(--text)'
+                : '1px solid var(--line)',
+              borderRadius: 6,
+              background: 'var(--bg)',
+              cursor: 'pointer',
+              fontSize: 17,
+            }}
+          >
+            {icon}
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+</details>
 
   <label
     title="무드 사진"

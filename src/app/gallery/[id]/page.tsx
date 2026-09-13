@@ -161,7 +161,8 @@ export default function BackupDetailPage() {
   <div
     className="post-body"
     style={{ fontSize: 12.5, margin: '0 0 16px' }}
-  >
+    dangerouslySetInnerHTML={{ __html: sanitizeHtml(p.desc) }}
+  />
     {p.desc}
   </div>
 )}

@@ -1638,7 +1638,7 @@ body.edit-on .main-grid.gridlines .wgt{outline-offset:0}
 .sym-pop .sym-tabs button{padding:4px 8px;border-radius:7px;font-size:10px;color:var(--faint);transition:.12s;white-space:nowrap}
 .sym-pop .sym-tabs button:hover{color:var(--ink)}
 .sym-pop .sym-tabs button.on{background:var(--btn-dark,var(--ink));color:var(--btn-dark-fg,#fff)}
-.sym-pop .sym-grid{display:grid;grid-template-columns:repeat(11,30px);gap:2px}
+.sym-pop .sym-grid{display:grid;grid-template-columns:repeat(12,30px);gap:2px}
 .sym-pop .sym-grid button{width:30px;height:30px;border-radius:7px;font-size:15px;display:grid;place-items:center;color:var(--ink);transition:.12s}
 .sym-pop .sym-grid button:hover{background:var(--dd-hv,rgba(127,127,127,.14))}
 /* 커미션 양식 빌더 (v1.9) — 항목 카드 */

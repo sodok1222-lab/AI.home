@@ -251,6 +251,7 @@ export function themeToCssVars(t: ThemeVars): Record<string, string> {
     '--search-ic': t.searchIc ?? '#8b919b', '--search-bd': t.searchBd ?? '#3a404a',
     '--accent': t.accent, '--accent-soft': t.accentSoft,
     '--gallery-arrow': t.galleryArrow ?? '#8c98c4',
+    '--gallery-arrow-bg': t.galleryArrowBg ?? '#f5f6fa',
     // 진한 버튼 3색 — 호버 미지정 시 배경에서 살짝 밝게 자동 파생
     '--btn-dark': t.btnDark ?? '#1d2025',
     '--btn-dark-fg': t.btnDarkFg ?? '#ffffff',

@@ -504,14 +504,15 @@ export function DiaryForm({
     style={{
       width: 44,
       height: 38,
-      border: '1px solid var(--line)',
-      borderRadius: 6,
-      display: 'grid',
-      placeItems: 'center',
-      cursor: 'pointer',
-      overflow: 'hidden',
-      flexShrink: 0,
-    }}
+        background: '#fff',
+  border: '1.5px solid var(--line)', 
+  borderRadius: 'var(--radius-s)', 
+  display: 'grid', 
+  placeItems: 'center', 
+  cursor: 'pointer', 
+  overflow: 'hidden', 
+  flexShrink: 0, 
+}}
   >
     {mood.iconImage ? (
       <BlobImg
@@ -566,17 +567,16 @@ export function DiaryForm({
                         )
                       }
                       title="무드 색상"
-                      style={{
-                        width: 36,
-                        height: 30,
-                        padding: 2,
-                        border:
-                          '1px solid var(--line)',
-                        borderRadius: 6,
-                        background:
-                          'transparent',
-                        cursor: 'pointer',
-                      }}
+                     style={{
+  width: 44,
+  height: 38,
+  padding: 2,
+  border: '1.5px solid var(--line)',
+  borderRadius: 'var(--radius-s)',
+  background: '#fff',
+  cursor: 'pointer',
+  boxSizing: 'border-box',
+}}
                     />
 
                     {/* 삭제 */}

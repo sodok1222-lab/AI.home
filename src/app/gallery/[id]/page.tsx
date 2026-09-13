@@ -163,10 +163,9 @@ export default function BackupDetailPage() {
     style={{ fontSize: 12.5, margin: '0 0 16px' }}
     dangerouslySetInnerHTML={{ __html: sanitizeHtml(p.desc) }}
   />
-    {p.desc}
-  </div>
 )}
-
+ 
+      </div>
         {p.type === 'log' ? (
           /* 로그형 — 웹툰식 세로 스크롤 · 이미지 사이 틈 없이 이어 붙임 (만화 연결) */
           <div style={{ borderRadius: 10, overflow: 'hidden' }}>

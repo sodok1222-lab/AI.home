@@ -255,7 +255,7 @@ function DesignPane() {
         </div>
       </div>
 
-            <div className="set-row">
+      <div className="set-row">
         <div className="l"><b>갤러리 화살표 아이콘</b><small>갤러리 이전/다음 버튼의 아이콘 색상</small></div>
         <div className="cp-group">
           <ColorField value={state.vars.galleryArrow ?? '#8c98c4'}

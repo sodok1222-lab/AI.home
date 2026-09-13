@@ -262,7 +262,13 @@ function DesignPane() {
             onChange={hex => setVar('galleryArrow', hex)} />
         </div>
       </div>
-
+     <div className="set-row">
+      <div className="l"><b>갤러리 화살표 배경</b><small>갤러리 이전/다음 버튼 네모칸의 배경색</small></div>
+      <div className="cp-group">
+        <ColorField value={state.vars.galleryArrowBg ?? '#f5f6fa'}
+          onChange={hex => setVar('galleryArrowBg', hex)} />
+       </div>
+     </div>
       {/* 배경 — 그라데이션(각도) / 이미지(블러) 선택 (v1.9) */}
       <div className="set-row" style={{ flexWrap: 'wrap' }}>
         <div className="l"><b>배경</b><small>그라데이션(시작→끝·각도) 또는 이미지(업로드·블러)</small></div>

@@ -525,7 +525,19 @@ export function DiaryForm({
         }}
       />
     ) : (
-      <span style={{ fontSize: 12 }}>📷︎</span>
+      <span
+  style={{
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: 16,
+    lineHeight: 1,
+  }}
+>
+  📷︎
+</span>
     )}
 
     <input

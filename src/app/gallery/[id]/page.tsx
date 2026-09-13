@@ -45,6 +45,10 @@ export default function BackupDetailPage() {
   const imgs: { url?: string; ph?: string }[] = p.images.length
     ? p.images.map(u => ({ url: u }))
     : p.phList.map(c => ({ ph: c }));
+
+  if (imgs.length === 0) {
+  imgs.push({ ph: 'cool' });
+}
   /* 글쓴이 확인 (v2.0 발견) — **둘 다 없을 때 같다고 보면 안 된다.**
      예전 글이나 손님이 쓴 글은 authorId가 없는데, 비로그인 방문자도 user?.id가 없어
      `undefined === undefined`로 통과했다 — 아무나 남의 글을 고치고 지울 수 있었다 */

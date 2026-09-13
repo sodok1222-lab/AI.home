@@ -167,7 +167,7 @@ export function DiaryForm({
     const next: Mood = {
       id: newId(),
       name: '새 무드',
-      icon: '☀️',
+      icon: '♥',
       color: '#888888',
     };
 

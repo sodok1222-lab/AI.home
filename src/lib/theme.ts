@@ -54,7 +54,8 @@ export interface ThemeVars {
   // focusColor: 테두리·링 색 / focusRing: 링 방식(은은한 글로우 · 선명한 라인 · 없음) / focusW: 링 두께 px
   focusColor?: string; focusRing?: 'glow' | 'line' | 'none'; focusW?: number;
   // 갤러리 이전/다음 화살표 아이콘 색
- galleryArrow?: string;
+  galleryArrow?: string;
+  galleryArrowBg?: string;
    
   // 포인트 컬러
   accent: string; accentSoft: string;

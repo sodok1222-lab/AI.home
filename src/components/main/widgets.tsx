@@ -213,7 +213,7 @@ export function DiaryWidget() {
         const m = moods.find(x => x.id === p.moodId);
         return (
           <div key={p.id} className="diary-mini" onClick={() => router.push(`/diary#${p.id}`)}>
-            <div className="mood" style={{ background: moodTint(m?.color ?? '#888'), color: m?.color }}>{m?.icon ?? '·'}</div>
+            <DiaryMoodIcon mood={m} />
             <div className="t"><span className="tt">{p.title}</span> <small>{p.date.slice(5).replace('-', '.')}{m ? ` · ${m.name}` : ''}</small></div>
           </div>
         );

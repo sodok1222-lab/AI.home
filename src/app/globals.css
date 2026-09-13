@@ -1857,11 +1857,7 @@ body.edit-on .main-grid.gridlines .wgt{outline-offset:0}
 
   color: var(--gallery-arrow);
 
-  background: color-mix(
-    in srgb,
-    var(--panel) 88%,
-    var(--accent) 12%
-  );
+  background: var(--gallery-arrow-bg);
 
   border: 1px solid color-mix(
     in srgb,

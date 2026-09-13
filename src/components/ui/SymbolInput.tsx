@@ -44,7 +44,34 @@ const SYM_PAGES: { label: string; syms: string[] }[] = [
       '「', '」', '『', '』', '【', '】', '〈', '〉', '《', '》', '〔', '〕', '❛', '❜', '❝', '❞',
     ],
   },
-];
+  {
+    label: '사진·카메라',
+    syms: [
+      '📷︎', '📸︎', '📹︎', '🎞︎',
+      '📽︎', '🎬︎', '📺︎', '📼︎',
+      '🔍︎', '🔎︎', '⌕', '⌾',
+      '◉', '◎', '⊙', '✦',
+    ],
+  },
+  {
+    label: '자연·날씨',
+    syms: [
+      '☀︎', '☼', '☁︎', '☂︎',
+      '☔︎', '❄︎', '☃︎', '☄︎',
+      '⚡︎', '☾', '☽', '☉',
+      '🌈︎', '🌊︎', '💧︎', '🌡︎',
+    ],
+  },
+  {
+    label: '기타',
+    syms: [
+      '☎︎', '☏', '✉︎', '✎',
+      '✐', '✏︎', '⌂', '⌘',
+      '⌛︎', '⏳︎', '⚑', '⚐',
+      '♟', '♞', '♜', '♤',
+    ],
+  },
+  ];
 
 // 팝업 크기 (CSS와 동기) — 8열×30px+gap2 + padding 16 + border 2 + 페이지 탭 줄(26)
 const COLS = 8;
@@ -52,7 +79,7 @@ const MAX_ROWS = Math.max(...SYM_PAGES.map(p => Math.ceil(p.syms.length / COLS))
 const POP_W = COLS * 30 + (COLS - 1) * 2 + 16 + 2;
 const POP_H = MAX_ROWS * 30 + (MAX_ROWS - 1) * 2 + 16 + 2 + 30;
 
-export function SymbolInput({ value, onChange, maxLength = 2, style }: {
+export function SymbolInput({ value, onChange, maxLength = 4, style }: {
   value: string; onChange: (v: string) => void; maxLength?: number; style?: React.CSSProperties;
 }) {
   const [pos, setPos] = useState<{ left: number; top: number } | null>(null);

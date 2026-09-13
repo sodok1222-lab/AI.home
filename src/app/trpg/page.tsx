@@ -243,7 +243,7 @@ function TrpgPageInner() {
 
   // sp: 편집모드 드래그 정렬 props (다른 목록과 같은 방식, v2.0)
   const Ticket = ({ l }: { l: TrpgLog }) => (
-    <div className="ticket"
+    <div className="ticket" data-card-sort={editOn && isAdmin ? 'true' : undefined}
       onContextMenu={e => openOrder(e, l.id)}
      onClick={() => {
   if (!editOn || (isAdmin && l.listHidden)) {

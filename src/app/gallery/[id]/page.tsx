@@ -65,20 +65,6 @@ export default function BackupDetailPage() {
     ? galleryPosts[postIndex + 1]
     : null;
 
-    const movePost = (direction: 'prev' | 'next') => {
-    if (postNav) return;
-
-    const target = direction === 'prev' ? prevPost : nextPost;
-
-    if (!target) return;
-
-    setPostNav(direction);
-
-    setTimeout(() => {
-      router.push(`/gallery/${target.id}`);
-    }, 280);
-  };
-
   const movePost = (direction: 'prev' | 'next') => {
     if (postNav) return;
 

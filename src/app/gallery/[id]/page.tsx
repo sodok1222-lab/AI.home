@@ -207,6 +207,7 @@ export default function BackupDetailPage() {
           </>
         )}
       </div>
+      </div>
 
       {/* 단일형·단일(세로) 확대 보기 — 뷰어와 같은 순번에서 시작, ‹ ›로 이어 넘김 */}
       {lbOpen && (p.type === 'single' || p.type === 'vlist') && p.images.length > 0 && (

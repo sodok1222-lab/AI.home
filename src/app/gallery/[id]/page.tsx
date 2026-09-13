@@ -165,7 +165,7 @@ export default function BackupDetailPage() {
   />
 )}
  
-      </div>
+
         {p.type === 'log' ? (
           /* 로그형 — 웹툰식 세로 스크롤 · 이미지 사이 틈 없이 이어 붙임 (만화 연결) */
           <div style={{ borderRadius: 10, overflow: 'hidden' }}>

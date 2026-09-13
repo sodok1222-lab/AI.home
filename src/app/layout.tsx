@@ -82,6 +82,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           'dragstart',
           function (e) {
             if (isMemoArea(e.target)) return;
+            if (e.target && e.target.closest && e.target.closest('.tc-card')) return;
             e.preventDefault();
           },
           true

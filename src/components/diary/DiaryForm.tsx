@@ -473,14 +473,14 @@ export function DiaryForm({
                     />
 
                  {/* 아이콘 / 사진 */}
-
 <div
   style={{
-    display: 'flex',
-    flexWrap: 'wrap',
-    alignItems: 'center',
-    gap: 4,
+    display: 'grid',
+    gridTemplateColumns: '44px 44px',
+    gap: 6,
     width: 94,
+    minWidth: 94,
+    alignItems: 'center',
   }}
 >
 <SymbolInput

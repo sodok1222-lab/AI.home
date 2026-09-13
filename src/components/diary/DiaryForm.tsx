@@ -525,7 +525,7 @@ export function DiaryForm({
         }}
       />
     ) : (
-      <span style={{ fontSize: 12 }}>📷</span>
+      <span style={{ fontSize: 12 }}>📷︎</span>
     )}
 
     <input

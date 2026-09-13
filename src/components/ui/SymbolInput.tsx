@@ -86,7 +86,7 @@ const SYM_PAGES: { label: string; syms: string[] }[] = [
   ];
 
 // 팝업 크기 (CSS와 동기) — 8열×30px+gap2 + padding 16 + border 2 + 페이지 탭 줄(26)
-const COLS = 8;
+const COLS = 12;
 const MAX_ROWS = Math.max(...SYM_PAGES.map(p => Math.ceil(p.syms.length / COLS)));
 const POP_W = COLS * 30 + (COLS - 1) * 2 + 16 + 2;
 const POP_H = MAX_ROWS * 30 + (MAX_ROWS - 1) * 2 + 16 + 2 + 30;

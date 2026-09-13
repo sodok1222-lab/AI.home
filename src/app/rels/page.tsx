@@ -46,7 +46,7 @@ export default function RelsPage() {
           const priv = r.visibility === 'private';
           const sp = sort(i) as { style?: React.CSSProperties };
           return (
-            <div key={r.id} className="rel-card" {...sort(i)}
+            <div key={r.id} className="rel-card" data-card-sort={editOn && isAdmin ? 'true' : undefined} {...sort(i)}
               style={{ ...(priv ? { opacity: .45 } : undefined), ...sp.style }}
               onClick={() => {
                 if (editOn) return;

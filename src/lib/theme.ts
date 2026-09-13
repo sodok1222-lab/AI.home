@@ -91,6 +91,7 @@ export const DARK_THEME: ThemeVars = {
   tabBg: '#3a4049', tabFg: '#aab0ba', tabOnBg: '#fbfbfc', tabOnFg: '#1d2025',
   cropBg: '#2c313a',
   galleryArrow: '#8c98c4',
+  galleryArrowBg: '#f5f6fa',
   accent: '#a63a45', accentSoft: '#c96a73',
   radius: 14, radiusS: 9, shadow: 100, ddShadow: 100,
 };

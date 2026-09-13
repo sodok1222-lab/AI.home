@@ -19,9 +19,10 @@ export default function BackupDetailPage() {
   const router = useRouter();
   const { user, isAdmin } = useAuth();
   const [posts, setPosts, loaded] = useLocalList<BackupPost>('ohome.backup.v1', BACKUP_SEED);
-  const [cur, setCur] = useState(0);
+    const [cur, setCur] = useState(0);
   const [delAsk, setDelAsk] = useState(false);
   const [lbOpen, setLbOpen] = useState(false); // 단일형 — 클릭 확대 보기
+  const [postNav, setPostNav] = useState<'prev' | 'next' | null>(null);
   const { st: boardSet } = useBoardSettings(); // 유형 뱃지 색 (환경설정 > 게시판 관리)
 
   const p = posts.find(x => x.id === id);
@@ -49,6 +50,34 @@ export default function BackupDetailPage() {
      `undefined === undefined`로 통과했다 — 아무나 남의 글을 고치고 지울 수 있었다 */
   const canManage = isAdmin || (!!p.authorId && p.authorId === user?.id);
 
+  const galleryPosts = posts.filter(x =>
+    (x.secId ?? MAIN_SEC) === (p.secId ?? MAIN_SEC) &&
+    (isAdmin || x.visibility === 'public' || (x.visibility === 'member' && user))
+  );
+
+  const postIndex = galleryPosts.findIndex(x => x.id === p.id);
+
+  const prevPost = postIndex > 0
+    ? galleryPosts[postIndex - 1]
+    : null;
+
+  const nextPost = postIndex >= 0 && postIndex < galleryPosts.length - 1
+    ? galleryPosts[postIndex + 1]
+    : null;
+
+  const movePost = (direction: 'prev' | 'next') => {
+    if (postNav) return;
+
+    const target = direction === 'prev' ? prevPost : nextPost;
+
+    if (!target) return;
+
+    setPostNav(direction);
+
+    setTimeout(() => {
+      router.push(`/gallery/${target.id}`);
+    }, 280);
+  };
   // 파일 id/URL 모두 지원 — blobStore에서 로드 (새로고침에도 유지)
   // natural: 고정 프레임 안에서 확대 없이 원본 크기 그대로 가운데 (단일형 — 프레임보다 크면 축소만)
   const Img = ({ im, ratio, natural }: { im: { url?: string; ph?: string }; ratio?: string; natural?: boolean }) => {

@@ -72,7 +72,7 @@ function CharsInner() {
           const priv = c.visibility === 'private';
           const sp = sort(i) as { style?: React.CSSProperties };
           return (
-            <div key={c.id} className="char-card" {...sort(i)}
+            <div key={c.id} className="char-card" data-card-sort={editOn && isAdmin ? 'true' : undefined} {...sort(i)}
               style={{ ...(priv ? { opacity: .45 } : undefined), ...sp.style }}
               onClick={() => { if (!editOn) router.push(charPath(c)); }}>
               <div className="thumb" style={{ position: 'relative' }}>

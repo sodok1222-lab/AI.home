@@ -1915,3 +1915,25 @@ body.edit-on .main-grid.gridlines .wgt{outline-offset:0}
 
   display: block;
 }
+
+.gallery-post-nav.is-clicked {
+  animation: galleryPostNavClick 280ms ease;
+}
+
+@keyframes galleryPostNavClick {
+  0% {
+    transform: translateY(-50%) scale(1);
+  }
+
+  35% {
+    transform: translateY(-50%) scale(.78);
+  }
+
+  65% {
+    transform: translateY(-50%) scale(1.06);
+  }
+
+  100% {
+    transform: translateY(-50%) scale(1);
+  }
+}

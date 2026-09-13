@@ -304,7 +304,7 @@ function TrpgPageInner() {
               <div className="panel flush trpg-basic">
                 {basicShown.slice(logStart, logStart + PER_LOG).map((l, i) => (
                   // 드래그 위치는 전체 기준으로 넘긴다 — 페이지 안 위치로 넘기면 2페이지에서 어긋난다
-                  <div key={l.id} className="list-item" {...gridDragProps(logStart + i)}
+                  <div key={l.id} className="list-item" data-card-sort={editOn && isAdmin ? 'true' : undefined} {...gridDragProps(logStart + i)}
                     onContextMenu={e => openOrder(e, l.id)}
                      onClick={() => {
                       if (!editOn || (isAdmin && l.listHidden)) {

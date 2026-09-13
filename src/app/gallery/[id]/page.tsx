@@ -110,6 +110,24 @@ export default function BackupDetailPage() {
 
       {/* 본문만 폭 제한 — 헤더는 풀폭 위치 유지 */}
       <div className="gallery-detail-shell">
+
+        {prevPost && (
+  <button
+    type="button"
+    className={`gallery-post-nav prev ${postNav === 'prev' ? 'is-clicked' : ''}`}
+    onClick={() => movePost('prev')}
+    aria-label="이전 갤러리"
+  >
+    <svg
+      className="gallery-post-nav-icon"
+      viewBox="0 0 28 40"
+      aria-hidden="true"
+    >
+      <path d="M 19 5 L 7 20 L 19 35" />
+    </svg>
+  </button>
+)}
+        
       <div className="panel" style={{ padding: 20, maxWidth: 960, margin: '0 auto' }}>
         {/* 제목·뱃지 세로 중앙 정렬 + 아래 여백 확보 */}
         <h2 style={{ fontSize: 18, marginBottom: p.desc ? 8 : 16, display: 'flex', alignItems: 'center', gap: 8 }}>

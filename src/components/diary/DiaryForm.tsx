@@ -518,7 +518,7 @@ export function DiaryForm({
         fileRef={mood.iconImage}
         ph="＋"
         imgStyle={{
-          width: 30,
+          width: 44,
           height: 30,
           objectFit: 'cover',
         }}

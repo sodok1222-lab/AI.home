@@ -480,7 +480,7 @@ export function DiaryForm({
     flexWrap: 'wrap',
     alignItems: 'center',
     gap: 4,
-    width: 82,
+    width: 94,
   }}
 >
 <SymbolInput
@@ -503,7 +503,7 @@ export function DiaryForm({
     title="무드 사진"
     style={{
       width: 44,
-      height: 30,
+      height: 38,
       border: '1px solid var(--line)',
       borderRadius: 6,
       display: 'grid',

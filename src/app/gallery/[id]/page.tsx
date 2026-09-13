@@ -76,7 +76,7 @@ export default function BackupDetailPage() {
 
     setTimeout(() => {
       router.push(`/gallery/${target.id}`);
-    }, 280);
+    }, 180);
   };
   // 파일 id/URL 모두 지원 — blobStore에서 로드 (새로고침에도 유지)
   // natural: 고정 프레임 안에서 확대 없이 원본 크기 그대로 가운데 (단일형 — 프레임보다 크면 축소만)

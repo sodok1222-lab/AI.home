@@ -471,31 +471,49 @@ export function DiaryForm({
                       placeholder="무드 이름"
                     />
 
-                    {/* 아이콘 / 사진 */}
+                 {/* 아이콘 / 사진 */}
 
 <div
   style={{
     display: 'flex',
+    flexWrap: 'wrap',
     alignItems: 'center',
-    gap: 5,
+    gap: 4,
+    width: 82,
   }}
 >
-  <KInput
-    value={mood.icon}
-    onChange={e =>
-      updateMood(
-        mood.id,
-        {
-          icon: e.target.value,
-        }
-      )
-    }
-    placeholder="☀️"
-    style={{
-      textAlign: 'center',
-      width: 44,
-    }}
-  />
+  {['❤️', '⭐', '🌸', '☀️', '🌙'].map(icon => (
+    <button
+      key={icon}
+      type="button"
+      title={`이모지 ${icon}`}
+      onClick={() =>
+        updateMood(
+          mood.id,
+          {
+            icon: icon,
+          }
+        )
+      }
+      style={{
+        width: 24,
+        height: 24,
+        padding: 0,
+        border: mood.icon === icon
+          ? '2px solid var(--text)'
+          : '1px solid var(--line)',
+        borderRadius: 5,
+        background: 'var(--bg)',
+        cursor: 'pointer',
+        display: 'grid',
+        placeItems: 'center',
+        fontSize: 14,
+        lineHeight: 1,
+      }}
+    >
+      {icon}
+    </button>
+  ))}
 
   <label
     title="무드 사진"

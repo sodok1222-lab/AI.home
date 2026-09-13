@@ -160,6 +160,42 @@ export function MemoWidget({ conf }: { conf: WidgetConf }) {
 }
 
 /* ---------- DIARY (최근 일기 — 실데이터, 4.14) ---------- */
+function DiaryMoodIcon({ mood }: { mood?: Mood }) {
+  const url = useBlobUrl(mood?.iconImage);
+
+  return (
+    <div
+      className="mood"
+      style={{
+        background: url ? 'transparent' : moodTint(mood?.color ?? '#888'),
+        color: mood?.color,
+        overflow: 'hidden',
+      }}
+    />
+      ) : (
+        mood?.icon ?? '·'
+      )}
+    </div>
+  );
+}
+      {url ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={url}
+          alt=""
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            display: 'block',
+          }}
+        />
+      ) : (
+        mood?.icon ?? '·'
+      )}
+    </div>
+  );
+}
 export function DiaryWidget() {
   const router = useRouter();
   const { user, isAdmin } = useAuth();

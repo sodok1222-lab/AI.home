@@ -127,6 +127,23 @@ export default function BackupDetailPage() {
     </svg>
   </button>
 )}
+
+        {nextPost && (
+  <button
+    type="button"
+    className={`gallery-post-nav next ${postNav === 'next' ? 'is-clicked' : ''}`}
+    onClick={() => movePost('next')}
+    aria-label="다음 갤러리"
+  >
+    <svg
+      className="gallery-post-nav-icon"
+      viewBox="0 0 28 40"
+      aria-hidden="true"
+    >
+      <path d="M 9 5 L 21 20 L 9 35" />
+    </svg>
+  </button>
+)}
         
       <div className="panel" style={{ padding: 20, maxWidth: 960, margin: '0 auto' }}>
         {/* 제목·뱃지 세로 중앙 정렬 + 아래 여백 확보 */}

@@ -42,7 +42,6 @@ function MoodIcon({
         color: mood?.color ?? 'var(--sub)',
       }}
     >
-      id="xq7k2m"
 {mood?.iconImage ? (
   <BlobImg fileRef={mood.iconImage} ph="" />
 ) : (
